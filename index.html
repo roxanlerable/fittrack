@@ -15,7 +15,7 @@
   :root{
     --bg:#0d0a18; --card:#1a1430; --card2:#241b40; --line:#372a5e;
     --txt:#f2eefc; --mut:#a99dca; --acc:#a855f7; --acc2:#e879f9; --acc3:#7c3aed;
-    --warn:#fbbf24; --bad:#fb7185; --rad:18px;
+    --warn:#fbbf24; --bad:#fb7185; --ok:#4ade80; --rad:18px;
     --grad:linear-gradient(135deg,#a855f7 0%,#e879f9 100%);
     --grad2:linear-gradient(135deg,#7c3aed 0%,#a855f7 100%);
   }
@@ -131,13 +131,34 @@
   @keyframes confettiFall{0%{opacity:1}to{transform:translateY(108vh) rotate(620deg);opacity:.15}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   .exohead{cursor:pointer}
-  .info{margin-top:9px;background:rgba(168,85,247,.16);color:var(--acc2);border:1px solid var(--line);
+  .info{margin-top:9px;margin-right:6px;background:rgba(168,85,247,.16);color:var(--acc2);border:1px solid var(--line);
     border-radius:10px;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer}
   .exodetail{margin-top:10px;border-top:1px solid var(--line);padding-top:11px;animation:cardin .3s ease}
   .exoimg{width:100%;max-width:300px;border-radius:12px;display:block;margin:0 auto 10px;background:#fff}
   .how{font-size:13px;color:var(--txt);line-height:1.55}
   .vidlink{display:inline-block;margin-top:11px;color:#fff;background:var(--grad2);padding:8px 13px;
     border-radius:10px;font-size:13px;font-weight:700;text-decoration:none}
+  .tbtn{display:inline-block;margin-top:10px;background:rgba(124,58,237,.22);color:#fff;border-color:var(--acc3)}
+  .wrec{margin-top:11px;background:rgba(168,85,247,.1);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:13px}
+  .wsave{margin-top:7px}
+  .wsave input{width:90px;display:inline-block;padding:7px 9px}
+  .stretchbtn{background:rgba(74,222,128,.14);color:#86efac;border-color:rgba(74,222,128,.35);margin-top:0}
+  .stretchrow{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .stretchrow:last-child{border-bottom:none}
+  .stretchrow .meta{color:var(--ok);font-weight:600;white-space:nowrap}
+  /* minuteur */
+  .tov{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;
+    background:rgba(8,5,18,.92);backdrop-filter:blur(6px)}
+  .tbox{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 22px;max-width:360px;width:100%;
+    text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.6)}
+  .tphase{font-size:14px;font-weight:800;letter-spacing:2.5px}
+  .tnum{font-size:84px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tround{color:var(--mut);font-weight:700;font-size:14px}
+  .tname{color:var(--txt);font-size:14px;margin-top:6px;font-weight:600;min-height:18px}
+  .tctrls{display:flex;gap:8px;justify-content:center;margin-top:18px}
+  .tcfg{margin-top:14px;color:var(--mut);font-size:12px;display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap}
+  .tcfg input{width:58px;text-align:center;padding:7px}
 </style>
 </head>
 <body>
@@ -163,6 +184,14 @@
         <div class="fc"><div class="s">🌅 MATIN</div><div class="g" id="fcAm">—</div></div>
         <div class="fc"><div class="s">🌆 APRÈS-MIDI</div><div class="g" id="fcPm">—</div></div>
       </div>
+    </div>
+    <div class="card">
+      <h2>Régularité</h2>
+      <div class="grid">
+        <div class="stat"><div class="num" id="streakCur">0</div><div class="lab">jours d'affilée 🔥</div></div>
+        <div class="stat"><div class="num" id="streakBest">0</div><div class="lab">record</div></div>
+      </div>
+      <div class="muted center" id="streakMsg" style="margin-top:8px"></div>
     </div>
     <div class="card">
       <h2>Aujourd'hui</h2>
@@ -198,7 +227,7 @@
         <button class="btn sec" id="prevDay">◀ Hier</button>
         <button class="btn sec" id="nextDay">Demain ▶</button>
       </div>
-      <div class="hint">Une nouvelle séance matin (1h) + après-midi (1h) est générée automatiquement chaque jour. La rotation laisse chaque muscle récupérer ~72h. Coche les exercices au fur et à mesure.</div>
+      <div class="hint">Touche « ⓘ Détails & minuteur » sous un exercice pour la fiche, le poids conseillé et le minuteur Tabata. Étirements optionnels en bas de chaque séance.</div>
     </div>
     <div class="card">
       <h2>Historique séances</h2>
@@ -270,6 +299,7 @@
   <section id="profil" class="view">
     <div class="card">
       <h2>Mon profil</h2>
+      <div style="margin-bottom:10px"><label>Prénom (pour personnaliser)</label><input id="pNom" placeholder="ex : Roxan"></div>
       <div class="row">
         <div><label>Sexe</label><select id="pSex"><option value="h">Homme</option><option value="f">Femme</option></select></div>
         <div><label>Âge</label><input id="pAge" type="number" inputmode="numeric" placeholder="18"></div>
@@ -308,7 +338,22 @@
   </section>
 
 </main>
-<footer>FitTrack · <b style="color:var(--acc2)">v5</b> · 100% local · tes données ne quittent pas ton appareil</footer>
+<footer>FitTrack · <b style="color:var(--acc2)">v7</b> · 100% local · tes données ne quittent pas ton appareil</footer>
+
+<div id="timerOverlay" class="tov">
+  <div class="tbox">
+    <div class="tphase" id="tPhase" style="color:var(--mut)">PRÊT</div>
+    <div class="tnum" id="tNum">--</div>
+    <div class="tround" id="tRound"></div>
+    <div class="tname" id="tName"></div>
+    <div class="tctrls">
+      <button class="btn blue" id="tStart">Démarrer</button>
+      <button class="btn sec" id="tReset">Reset</button>
+      <button class="btn sec" id="tClose">Fermer</button>
+    </div>
+    <div class="tcfg">Effort <input id="tWork" type="number" inputmode="numeric"> s · Repos <input id="tRest" type="number" inputmode="numeric"> s · Tours <input id="tRounds" type="number" inputmode="numeric"></div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -321,9 +366,9 @@ const EQUIP=[
   ["kettlebell","Kettlebell"],["band","Élastiques"],["cable","Poulie / machine"]
 ];
 const DEFAULT={
-  profile:{sexe:"h",age:18,taille:176,poidsActuel:100,poidsObjectif:85,activite:1.55,
+  profile:{nom:"",sexe:"h",age:18,taille:176,poidsActuel:100,poidsObjectif:85,activite:1.55,
     equip:["bodyweight","handles","dumbbell","legext","bike"]},
-  days:{}, sessions:{}
+  days:{}, sessions:{}, weights:{}
 };
 let DB=load();
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):structuredClone(DEFAULT);}catch(e){return structuredClone(DEFAULT);}}
@@ -367,7 +412,6 @@ const EX=[
  {n:"Rowing haltère unilatéral",g:"dos",e:["dumbbell"],t:"compound",img:"",how:"Un genou et une main en appui sur un banc, dos plat. Tire l'haltère vers la hanche en serrant l'omoplate, redescends contrôlé."},
  {n:"Rowing haltères (deux bras)",g:"dos",e:["dumbbell"],t:"compound",img:"Bent_Over_Two-Dumbbell_Row",how:"Buste penché ~45°, dos plat, bras tendus. Tire les deux haltères vers le bas des côtes en serrant les omoplates."},
  {n:"Soulevé de terre haltères",g:"dos",e:["dumbbell"],t:"compound",img:"Stiff-Legged_Dumbbell_Deadlift",how:"Haltères devant les cuisses, dos droit. Descends en poussant les hanches en arrière, remonte en contractant fessiers et dos."},
- {n:"Pull-over haltère",g:"dos",e:["dumbbell"],t:"isol",img:"",how:"Allongé, un haltère tenu à deux mains au-dessus de la poitrine. Descends-le derrière la tête bras semi-tendus, puis ramène."},
  {n:"Tractions pronation",g:"dos",e:["pullup"],t:"compound",img:"",how:"Suspendu à la barre, paumes vers l'avant. Tire-toi jusqu'à passer le menton au-dessus de la barre, redescends contrôlé."},
  {n:"Tractions supination",g:"dos",e:["pullup"],t:"compound",img:"",how:"Comme les tractions mais paumes vers toi : sollicite davantage les biceps."},
  {n:"Rowing barre buste penché",g:"dos",e:["barbell"],t:"compound",img:"",how:"Buste penché, dos plat, tire la barre vers le nombril en serrant les omoplates."},
@@ -376,7 +420,6 @@ const EX=[
  {n:"Squat gobelet",g:"jambes",e:["dumbbell","kettlebell"],t:"compound",img:"Goblet_Squat",how:"Un haltère tenu verticalement contre la poitrine. Descends en squat (cuisses parallèles), dos droit, talons au sol, remonte."},
  {n:"Soulevé de terre roumain haltères",g:"jambes",e:["dumbbell"],t:"compound",img:"Stiff-Legged_Dumbbell_Deadlift",how:"Jambes semi-tendues, haltères devant les cuisses. Pousse les hanches en arrière en descendant le long des jambes, remonte. Cible ischios/fessiers."},
  {n:"Fentes marchées",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Grand pas en avant, descends le genou arrière vers le sol, puis avance avec l'autre jambe. Buste droit."},
- {n:"Fentes bulgares",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Pied arrière surélevé sur un support, descends en fente sur la jambe avant, remonte. Excellent pour cuisses et fessiers."},
  {n:"Hip thrust",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Haut du dos appuyé sur un support, un poids sur les hanches. Monte le bassin en serrant les fessiers, redescends."},
  {n:"Leg extension (extension de jambes assis)",g:"jambes",e:["legext"],t:"isol",img:"Leg_Extensions",how:"Assis sur la machine, chevilles sous le rouleau. Tends les jambes en contractant les quadriceps, redescends lentement."},
  {n:"Leg extension unilatéral",g:"jambes",e:["legext"],t:"isol",img:"Leg_Extensions",how:"Comme le leg extension, mais une jambe à la fois : utile pour corriger les déséquilibres."},
@@ -384,7 +427,6 @@ const EX=[
  {n:"Mollets debout (haltères)",g:"jambes",e:["dumbbell","bodyweight"],t:"isol",img:"Standing_Calf_Raises",how:"Debout, haltères en main. Monte sur la pointe des pieds le plus haut possible, redescends lentement."},
  {n:"Wall sit / chaise",g:"jambes",e:["bodyweight"],t:"isol",img:"",how:"Dos contre le mur, cuisses parallèles au sol (assis sans chaise), tiens la position."},
  {n:"Développé épaules haltères",g:"epaules",e:["dumbbell"],t:"compound",img:"Dumbbell_Shoulder_Press",how:"Assis ou debout, haltères au niveau des épaules. Pousse au-dessus de la tête jusqu'à tendre les bras, redescends."},
- {n:"Développé Arnold",g:"epaules",e:["dumbbell"],t:"compound",img:"",how:"Paumes vers toi au départ, tourne les poignets en poussant vers le haut. Sollicite toute l'épaule."},
  {n:"Élévations latérales",g:"epaules",e:["dumbbell"],t:"isol",img:"Side_Lateral_Raise",how:"Bras le long du corps, coudes légèrement fléchis. Monte les haltères sur les côtés jusqu'à l'horizontale, redescends."},
  {n:"Oiseau (deltoïde postérieur)",g:"epaules",e:["dumbbell"],t:"isol",img:"",how:"Buste penché en avant, ouvre les bras sur les côtés en serrant les omoplates. Cible l'arrière de l'épaule."},
  {n:"Élévations frontales haltères",g:"epaules",e:["dumbbell"],t:"isol",img:"Front_Dumbbell_Raise",how:"Bras tendus devant, monte un haltère jusqu'à hauteur des yeux, redescends contrôlé. Alterne."},
@@ -404,34 +446,77 @@ const EX=[
  {n:"Crunch au sol",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, genoux fléchis. Décolle les épaules en contractant les abdos, redescends sans poser complètement la tête."},
  {n:"Reverse crunch (relevé de bassin)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, genoux fléchis vers la poitrine. Décolle le bassin du sol en enroulant le bas du dos, redescends contrôlé. Cible le bas des abdos."},
  {n:"Bicyclette (pédalo abdos)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, pédale dans le vide en amenant le coude vers le genou opposé, en alternance, sans tirer sur la nuque."},
- {n:"V-ups (relevé buste + jambes)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, monte simultanément buste et jambes tendues pour former un V, touche les pieds, redescends sans poser."},
- {n:"Dead bug",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Sur le dos, bras et genoux levés. Descends le bras et la jambe opposés vers le sol sans cambrer le dos, alterne. Gainage profond."},
- {n:"Planche avec touch épaules",g:"core",e:["bodyweight"],t:"isol",img:"",how:"En planche bras tendus, touche alternativement chaque épaule avec la main opposée sans bouger le bassin."},
- {n:"Relevés de jambes au sol (bas-ventre)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, mains sous les fessiers, jambes tendues. Monte-les à la verticale puis redescends lentement sans toucher le sol."},
+ {n:"Crunch jambes levées",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, jambes levées genoux pliés à 90°. Décolle les épaules en contractant les abdos, redescends doucement."},
  {n:"Mountain climbers",g:"core",e:["bodyweight"],t:"cardio",img:"",how:"En position de pompe, ramène alternativement les genoux vers la poitrine rapidement. Gainage + cardio."},
  {n:"Course à pied — endurance (20–30 min)",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Cours à allure modérée et régulière (tu peux tenir une conversation) pendant 20-30 min. Idéal pour brûler du gras."},
  {n:"Course à pied — fractionné (30s vite / 1 min lent)",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Après 5 min d'échauffement, alterne 30 s de course rapide et 1 min de footing lent, sur 12-15 min. Très efficace pour la perte de gras."},
  {n:"Course à pied — sprints courts",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Après échauffement, enchaîne 8-10 sprints de 20-30 s à fond, avec récupération complète (marche) entre chaque."},
  {n:"Burpees",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Squat mains au sol, saute les pieds en arrière (planche), une pompe, ramène les pieds, saute en l'air."},
- {n:"Kettlebell / haltère swings",g:"cardio",e:["kettlebell","dumbbell"],t:"cardio",img:"",how:"Poids entre les jambes, propulse-le devant toi jusqu'à hauteur d'épaule via une poussée explosive des hanches."},
- {n:"Thrusters haltères",g:"cardio",e:["dumbbell"],t:"cardio",img:"",how:"Squat haltères aux épaules, puis en remontant pousse les haltères au-dessus de la tête. Enchaîne."},
  {n:"Squats sautés",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Descends en squat puis saut explosif vers le haut, réception souple, et enchaîne."},
  {n:"Montées de genoux / corde à sauter",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Sur place, monte les genoux rapidement (ou saute à la corde) pour faire grimper le cardio."},
  {n:"Fentes sautées",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"En fente, saute pour changer de jambe en l'air, réception contrôlée. Cardio + jambes."}
 ];
 const EXMAP=Object.fromEntries(EX.map(x=>[x.n,x]));
-function detailHTML(name){
-  const info=EXMAP[name];if(!info)return"";
+
+// Poids conseillés de départ (à ajuster — 2 dernières reps difficiles)
+const REC={
+ "Développé couché haltères":"14–22 kg / haltère","Développé incliné haltères":"12–20 kg / haltère",
+ "Écarté haltères":"8–14 kg / haltère","Rowing haltère unilatéral":"16–26 kg","Rowing haltères (deux bras)":"12–20 kg / haltère",
+ "Soulevé de terre haltères":"16–24 kg / haltère","Squat gobelet":"16–28 kg","Soulevé de terre roumain haltères":"14–22 kg / haltère",
+ "Fentes marchées":"8–16 kg / haltère","Hip thrust":"16–30 kg","Mollets debout (haltères)":"12–22 kg / haltère",
+ "Développé épaules haltères":"10–18 kg / haltère","Élévations latérales":"5–10 kg / haltère",
+ "Oiseau (deltoïde postérieur)":"5–10 kg / haltère","Élévations frontales haltères":"5–10 kg / haltère",
+ "Curl haltères alterné":"8–14 kg / haltère","Curl marteau":"8–14 kg / haltère","Extension nuque haltère":"8–16 kg",
+ "Kickback triceps haltère":"5–10 kg / haltère","Russian twists":"4–10 kg",
+ "Leg extension (extension de jambes assis)":"règle la charge pour que les 2 dernières reps soient dures",
+ "Leg extension unilatéral":"règle la charge pour que les 2 dernières reps soient dures"
+};
+
+// Étirements optionnels selon le thème [nom, durée]
+const STRETCH={
+ pecs:[["Étirement pectoraux (avant-bras contre un mur / cadre de porte)","30s / côté"],["Étirement épaules (bras croisé devant la poitrine)","30s / côté"],["Posture du cobra (ouverture de la poitrine)","30s"],["Étirement triceps (coude derrière la tête)","30s / côté"]],
+ dos:[["Posture de l'enfant","45s"],["Chat-vache (dos rond puis dos creux)","8–10 cycles"],["Torsion vertébrale assise","30s / côté"],["Étirement grand dorsal (bras tendu, penche de côté)","30s / côté"]],
+ jambes:[["Étirement quadriceps debout (talon vers le fessier)","30s / côté"],["Étirement ischios (jambe tendue, buste vers l'avant)","30s / côté"],["Étirement fessiers (figure 4 au sol)","30s / côté"],["Étirement mollets (appui mur, jambe arrière tendue)","30s / côté"],["Fente basse (étirement de la hanche)","30s / côté"]],
+ epaules:[["Étirement deltoïde (bras croisé devant)","30s / côté"],["Étirement épaule au cadre de porte","30s / côté"],["Étirement trapèze (oreille vers l'épaule)","30s / côté"],["Cercles d'épaules lents","30s"]],
+ bras:[["Étirement biceps (bras tendu, paume au mur)","30s / côté"],["Étirement triceps (coude derrière la tête)","30s / côté"],["Étirement avant-bras (tire les doigts vers toi)","20s / côté"]],
+ core:[["Posture du cobra (étirement des abdos)","30s"],["Étirement latéral debout (bras au-dessus, penche)","30s / côté"],["Torsion allongée (genoux d'un côté)","30s / côté"],["Posture de l'enfant (bas du dos)","45s"]],
+ cardio:[["Étirement mollets au mur","30s / côté"],["Étirement quadriceps debout","30s / côté"],["Étirement ischios","30s / côté"],["Étirement fessiers (figure 4)","30s / côté"],["Étirement hanches (fente basse)","30s / côté"]]
+};
+
+function esc(s){return String(s).replace(/'/g,"\\'");}
+function saveWeight(name,val){if(!DB.weights)DB.weights={};val=String(val).trim();if(val)DB.weights[name]=val;else delete DB.weights[name];save();}
+function timerFromMeta(meta){
+  meta=meta||"";
+  let m=meta.match(/(\d+)\s*s(?:\s*effort)?\s*\/\s*(\d+)\s*s/);
+  if(m){const r=meta.match(/(\d+)\s*tours/);return{work:+m[1],rest:+m[2],rounds:r?+r[1]:4};}
+  m=meta.match(/(\d+)\s*×\s*(\d+)\s*s\b/);
+  if(m){return{work:+m[2],rest:15,rounds:+m[1]};}
+  if(/récup/i.test(meta)){
+    let rm=meta.match(/récup\s*(\d+)(?:[–-](\d+))?\s*(min|s)/i);let sec=90;
+    if(rm){let base=rm[2]?+rm[2]:+rm[1];sec=rm[3].toLowerCase()==="min"?base*60:base;}
+    return{work:0,rest:sec,rounds:1};
+  }
+  return null;
+}
+function detailHTML(name,meta){
+  const info=EXMAP[name];const tp=timerFromMeta(meta);const rec=REC[name];
+  if(!info&&!tp&&!rec) return "";
   const yt="https://www.youtube.com/results?search_query="+encodeURIComponent(name+" technique musculation");
-  const img=info.img?`<img class="exoimg" loading="lazy" src="https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${info.img}/0.jpg" alt="${name}" onerror="this.remove()">`:"";
-  return `<button class="info" onclick="toggleInfo(this)">ⓘ Comment faire</button>`+
-    `<div class="exodetail" style="display:none">${img}<div class="how">${info.how||""}</div>`+
+  const img=(info&&info.img)?`<img class="exoimg" loading="lazy" src="https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${info.img}/0.jpg" alt="${name}" onerror="this.remove()">`:"";
+  const how=info?`<div class="how">${info.how||""}</div>`:"";
+  let wt="";
+  if(rec){const cur=(DB.weights&&DB.weights[name])||"";
+    wt=`<div class="wrec">💪 Poids conseillé : <b>${rec}</b><div class="muted" style="margin-top:3px">À ajuster : les 2 dernières reps doivent être difficiles.</div>`+
+       `<div class="wsave">Mon poids : <input type="number" inputmode="decimal" value="${cur}" onchange="saveWeight('${esc(name)}',this.value)" placeholder="kg"> kg</div></div>`;}
+  let tb="";
+  if(tp){const lab=tp.work>0?("⏱ Minuteur "+tp.work+"s / "+tp.rest+"s"):("⏱ Minuteur de repos "+tp.rest+"s");
+    tb=`<div><button class="info tbtn" onclick="openTimer(${tp.work},${tp.rest},${tp.rounds},'${esc(name)}')">${lab}</button></div>`;}
+  return `<button class="info" onclick="toggleInfo(this)">ⓘ Détails & minuteur</button>`+
+    `<div class="exodetail" style="display:none">${img}${how}${wt}${tb}`+
     `<a class="vidlink" href="${yt}" target="_blank" rel="noopener">▶ Voir une démo vidéo</a></div>`;
 }
-function toggleInfo(btn){const d=btn.nextElementSibling;if(!d)return;const open=d.style.display!=="none";
-  d.style.display=open?"none":"block";btn.textContent=open?"ⓘ Comment faire":"▲ Masquer";}
+function toggleInfo(btn){const d=btn.nextElementSibling;if(!d)return;d.style.display=d.style.display==="none"?"block":"none";}
 
-// Rotation : chaque muscle 2x/semaine, espacé d'env. 72h, jamais 2x le même jour.
 const PLAN={
  1:{am:"pecs",pm:"jambes"},   // Lun
  2:{am:"dos",pm:"epaules"},   // Mar
@@ -460,29 +545,28 @@ function buildSession(group,slot,salt){
     const runs=shuffle(EX.filter(x=>x.n.indexOf("Course")===0),rnd);
     const hiit=shuffle(availCardio().filter(x=>x.n.indexOf("Course")!==0),rnd);
     if(runs[0]) out.push({txt:runs[0].n,meta:"Séance principale",note:"Cardio course — recomposition"});
-    for(let i=0;i<3&&i<hiit.length;i++) out.push({txt:hiit[i].n,meta:"45s effort / 15s repos × 4 tours",note:"Finisher HIIT"});
+    for(let i=0;i<3&&i<hiit.length;i++) out.push({txt:hiit[i].n,meta:"40s effort / 20s repos × 4 tours",note:"Finisher HIIT"});
     out.push({txt:"Gainage planche",meta:"3 × 45s",note:"Finisher abdos"});
   } else if(group==="core"){
     const cc=shuffle(pool.filter(x=>x.t==="isol"),rnd);
-    const schemes=["3 × 20 reps","3 × 45s","3 × 15 / côté","4 × 20 reps","3 × 30s"];
+    const schemes=["3 × 20 reps","3 × 45s","3 × 20 / côté","4 × 20 reps","3 × 30s"];
     for(let i=0;i<5&&i<cc.length;i++) out.push({txt:cc[i].n,meta:schemes[i%schemes.length],note:"Abdos / gainage"});
-    const fin=shuffle(availCardio().filter(x=>x.n.indexOf("Course")!==0),rnd)[0];
-    if(fin) out.push({txt:fin.n,meta:"4 tours · 40s / 20s",note:"Finisher brûle-graisses"});
+    out.push({txt:"Mountain climbers",meta:"40s effort / 20s repos × 4 tours",note:"Finisher brûle-graisses"});
   } else {
     const comp=shuffle(pool.filter(x=>x.t==="compound"),rnd);
     const isol=shuffle(pool.filter(x=>x.t==="isol"),rnd);
     const card=shuffle(availCardio().filter(x=>x.n.indexOf("Course")!==0),rnd);
-    if(comp[0]) out.push({txt:comp[0].n,meta:"4 séries × 5–6 reps · récup 2–3 min",note:"Force — lourd, technique propre"});
-    if(comp[1]) out.push({txt:comp[1].n,meta:"4 × 8–10 · récup 90s",note:"Hypertrophie"});
-    if(comp[2]||isol[0]){const e=comp[2]||isol[0];out.push({txt:e.n,meta:"3 × 10–12 · récup 75s",note:"Hypertrophie"});}
-    if(isol[0]&&isol[0]!==(comp[2])) out.push({txt:isol[0].n,meta:"3 × 12–15 · récup 60s",note:"Isolation — congestion"});
-    if(isol[1]) out.push({txt:isol[1].n,meta:"3 × 12–15 · récup 60s",note:"Isolation"});
-    if(card[0]) out.push({txt:card[0].n,meta:"4 tours · 40s / 20s",note:"Finisher brûle-graisses (recomp)"});
+    if(comp[0]) out.push({txt:comp[0].n,meta:"4 séries × 8–10 reps · récup 90–120s",note:"Force / hypertrophie — lourd, technique propre"});
+    if(comp[1]) out.push({txt:comp[1].n,meta:"4 × 10–12 reps · récup 90s",note:"Hypertrophie"});
+    if(comp[2]||isol[0]){const e=comp[2]||isol[0];out.push({txt:e.n,meta:"3 × 12 reps · récup 75s",note:"Hypertrophie"});}
+    if(isol[0]&&isol[0]!==(comp[2])) out.push({txt:isol[0].n,meta:"3 × 12–15 reps · récup 60s",note:"Isolation — congestion"});
+    if(isol[1]) out.push({txt:isol[1].n,meta:"3 × 15 reps · récup 60s",note:"Isolation"});
+    if(card[0]) out.push({txt:card[0].n,meta:"40s effort / 20s repos × 4 tours",note:"Finisher brûle-graisses (recomp)"});
     const absRnd=seedRand(salt+group+slot+"abs");
     const abs=shuffle(EX.filter(x=>x.g==="core"&&x.t==="isol"&&x.e.some(t=>avail().includes(t))),absRnd)[0];
-    if(abs) out.push({txt:abs.n,meta:"3 × 15–20 · récup 45s",note:"Finisher abdos"});
+    if(abs) out.push({txt:abs.n,meta:"3 × 15–20 reps · récup 45s",note:"Finisher abdos"});
   }
-  out.push({txt:"Retour au calme + étirements",meta:"5 min",warm:true});
+  (STRETCH[group]||STRETCH.cardio).forEach(s=>out.push({stretch:true,txt:s[0],meta:s[1]}));
   return out.map(o=>({...o,done:false}));
 }
 
@@ -500,6 +584,31 @@ function getSessions(key){
 }
 function regen(key){delete DB.sessions[key];getSessions(key);save();renderSessions();renderDash();}
 
+function cnt(o){const m=o.exos.filter(e=>!e.warm&&!e.stretch);return{done:m.filter(e=>e.done).length,total:m.length};}
+function dayActive(k){
+  const ss=DB.sessions[k];
+  if(ss){for(const slot of["am","pm"]){const o=ss[slot];if(o&&o.exos.some(e=>!e.warm&&!e.stretch&&e.done))return true;}}
+  const dd=DB.days[k];
+  if(dd&&((dd.foods&&dd.foods.length)||dd.water>0||dd.weight))return true;
+  return false;
+}
+function streaks(){
+  const base=new Date();
+  const key=off=>{const d=new Date(base);d.setDate(d.getDate()-off);return iso(d);};
+  let cur=0,start=dayActive(key(0))?0:1;
+  for(let off=start;;off++){if(dayActive(key(off)))cur++;else break;}
+  const set=new Set([...Object.keys(DB.sessions),...Object.keys(DB.days)].filter(dayActive));
+  let best=0;
+  set.forEach(k=>{
+    const prev=iso(new Date(new Date(k+"T12:00:00").getTime()-86400000));
+    if(set.has(prev))return;
+    let run=0,d=k;
+    while(set.has(d)){run++;d=iso(new Date(new Date(d+"T12:00:00").getTime()+86400000));}
+    if(run>best)best=run;
+  });
+  return{cur,best:Math.max(best,cur)};
+}
+
 function renderDash(){
   const k=todayIso();const d=dayData(k);
   const tot=d.foods.reduce((s,f)=>s+(+f.kcal||0),0);
@@ -507,6 +616,12 @@ function renderDash(){
   const tgt=calTarget();
   const dayIdx=Math.floor(new Date(k+"T12:00:00").getTime()/86400000);
   document.getElementById("motivTxt").textContent=QUOTES[dayIdx%QUOTES.length];
+  const stk=streaks();
+  document.getElementById("streakCur").textContent=stk.cur;
+  document.getElementById("streakBest").textContent=stk.best;
+  document.getElementById("streakMsg").textContent=stk.cur>=2?"Tu es en feu, ne lâche rien ! 🔥":stk.cur===1?"Belle entame, reviens demain !":"Coche tes exercices pour lancer ta série.";
+  const nom=(DB.profile.nom||"").trim();
+  document.getElementById("todayLabel").textContent=(nom?"Salut "+nom+" · ":"")+frDate(new Date());
   const s=getSessions(k);
   document.getElementById("fcAm").textContent=GLABEL[s.am.focus];
   document.getElementById("fcPm").textContent=GLABEL[s.pm.focus];
@@ -520,11 +635,8 @@ function renderDash(){
   const rest=tgt-tot;
   document.getElementById("dCalTxt").textContent=rest>=0?rest+" kcal restantes pour atteindre ta cible.":Math.abs(rest)+" kcal au-dessus de ta cible.";
   document.getElementById("dSessions").innerHTML=sessLine("am",s.am)+sessLine("pm",s.pm);
-  function sessLine(slot,o){
-    const total=o.exos.filter(e=>!e.warm).length;
-    const done=o.exos.filter(e=>!e.warm&&e.done).length;
-    return `<div class="item"><span><span class="pill ${slot}">${slot==="am"?"MATIN":"APRÈM"}</span> ${GLABEL[o.focus]}</span><b>${done}/${total}</b></div>`;
-  }
+  function sessLine(slot,o){const c=cnt(o);
+    return `<div class="item"><span><span class="pill ${slot}">${slot==="am"?"MATIN":"APRÈM"}</span> ${GLABEL[o.focus]}</span><b>${c.done}/${c.total}</b></div>`;}
   drawWeight("dChart");
   const w=weightSeries();
   if(w.length>=2){const diff=(w[w.length-1].v-w[0].v).toFixed(1);
@@ -539,28 +651,36 @@ function renderSessions(){
     `<div class="muted" style="margin-bottom:10px">${same?"Aujourd'hui · ":""}${frDate(viewDate)}</div>`+
     block("am",s.am,k)+block("pm",s.pm,k);
   const hist=Object.keys(DB.sessions).sort().reverse().slice(0,10).map(d=>{
-    const ss=DB.sessions[d];
-    const a=ss.am.exos.filter(e=>!e.warm&&e.done).length, at=ss.am.exos.filter(e=>!e.warm).length;
-    const p=ss.pm.exos.filter(e=>!e.warm&&e.done).length, pt=ss.pm.exos.filter(e=>!e.warm).length;
-    return `<div class="item"><span>${d}</span><span class="muted">Matin ${a}/${at} · Aprèm ${p}/${pt}</span></div>`;
+    const ss=DB.sessions[d];const a=cnt(ss.am),p=cnt(ss.pm);
+    return `<div class="item"><span>${d}</span><span class="muted">Matin ${a.done}/${a.total} · Aprèm ${p.done}/${p.total}</span></div>`;
   }).join("");
   document.getElementById("sessHist").innerHTML=hist||"Aucune séance enregistrée.";
 
   function block(slot,o,key){
-    const exos=o.exos.map((e,i)=>{
-      if(e.warm) return `<div class="exo" style="opacity:.7"><b>${e.txt}</b><div class="meta">${e.meta}</div></div>`;
-      return `<div class="exo ${e.done?'done':''}">
+    let html="";
+    o.exos.forEach((e,i)=>{
+      if(e.stretch) return;
+      if(e.warm){html+=`<div class="exo" style="opacity:.7"><b>${e.txt}</b><div class="meta">${e.meta}</div></div>`;return;}
+      html+=`<div class="exo ${e.done?'done':''}">
         <div class="exohead" onclick="toggleEx('${key}','${slot}',${i})"><b>${e.done?'✓ ':''}${e.txt}</b><div class="meta">${e.meta}</div><div class="note">${e.note||''}</div></div>
-        ${detailHTML(e.txt)}</div>`;
-    }).join("");
+        ${detailHTML(e.txt,e.meta)}</div>`;
+    });
+    const st=o.exos.filter(e=>e.stretch);
+    let sh="";
+    if(st.length){
+      sh=`<div class="exo" style="border-color:rgba(74,222,128,.4)"><button class="info stretchbtn" onclick="toggleInfo(this)">🧘 Étirements (optionnel) · ${st.length} exos</button>`+
+         `<div class="exodetail" style="display:none">`+
+         st.map(e=>`<div class="stretchrow"><b>${e.txt}</b><span class="meta">${e.meta}</span></div>`).join("")+
+         `</div></div>`;
+    }
     return `<div class="card" style="background:var(--card2)">
       <div class="sesshead"><div class="t"><span class="pill ${slot}">${slot==="am"?"MATIN · 1h":"APRÈS-MIDI · 1h"}</span> ${GLABEL[o.focus]}</div></div>
-      ${exos}</div>`;
+      ${html}${sh}</div>`;
   }
 }
 function toggleEx(key,slot,i){
   const sess=DB.sessions[key][slot];const e=sess.exos[i];e.done=!e.done;save();
-  const exs=sess.exos.filter(x=>!x.warm);
+  const exs=sess.exos.filter(x=>!x.warm&&!x.stretch);
   if(e.done && exs.length && exs.every(x=>x.done)){confetti();toast("Séance terminée 💪");}
   renderSessions();renderDash();
 }
@@ -575,6 +695,48 @@ function confetti(){
     document.body.appendChild(sp);
     setTimeout(()=>sp.remove(),2800);
   }
+}
+
+/* ---------- Minuteur Tabata ---------- */
+let AC=null;
+function ensureAudio(){try{if(!AC){const A=window.AudioContext||window.webkitAudioContext;if(A)AC=new A();}if(AC&&AC.state==="suspended")AC.resume();}catch(e){}}
+function beep(f,d){if(!AC)return;try{const o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);o.type="sine";o.frequency.value=f;const t=AC.currentTime;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.4,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.start(t);o.stop(t+d+0.02);}catch(e){}}
+let TI=null,TS=null;
+function tEl(id){return document.getElementById(id);}
+function openTimer(work,rest,rounds,name){
+  tEl("tWork").value=work;tEl("tRest").value=rest;tEl("tRounds").value=rounds;
+  tEl("tName").textContent=name||"";tEl("timerOverlay").style.display="flex";
+  TS=null;tResetView();
+}
+function tResetView(){
+  if(TI){clearInterval(TI);TI=null;}
+  tEl("tPhase").textContent="PRÊT";tEl("tPhase").style.color="var(--mut)";
+  tEl("tNum").textContent="--";tEl("tRound").textContent="";tEl("tStart").textContent="Démarrer";
+}
+function tRender(){
+  const names={prep:"PRÉPARATION",work:"EFFORT",rest:"REPOS",done:"TERMINÉ"};
+  tEl("tPhase").textContent=names[TS.phase]||"";
+  tEl("tPhase").style.color=TS.phase==="work"?"var(--acc)":TS.phase==="rest"?"var(--acc2)":TS.phase==="done"?"var(--ok)":"var(--mut)";
+  tEl("tNum").textContent=TS.phase==="done"?"✓":String(Math.max(0,TS.left)).padStart(2,"0");
+  tEl("tRound").textContent=TS.phase==="done"?"Bravo !":("Tour "+TS.round+" / "+TS.rounds);
+}
+function tNextRound(){
+  if(TS.round>=TS.rounds){TS.phase="done";clearInterval(TI);TI=null;beep(660,.5);tEl("tStart").textContent="Rejouer";}
+  else{TS.round++;TS.phase="work";TS.left=TS.work;beep(880,.15);}
+}
+function tAdvance(){
+  if(TS.phase==="prep"){if(TS.work>0){TS.phase="work";TS.left=TS.work;beep(880,.15);}else{TS.phase="rest";TS.left=TS.rest;beep(440,.2);}}
+  else if(TS.phase==="work"){if(TS.rest>0){TS.phase="rest";TS.left=TS.rest;beep(440,.2);}else tNextRound();}
+  else if(TS.phase==="rest"){tNextRound();}
+}
+function tTick(){TS.left--;if(TS.left<=0&&TS.phase!=="done")tAdvance();tRender();}
+function tStart(){
+  ensureAudio();
+  if(TI){clearInterval(TI);TI=null;tEl("tStart").textContent="Reprendre";return;}
+  const work=+tEl("tWork").value||0,rest=+tEl("tRest").value||0,rounds=+tEl("tRounds").value||1;
+  if(!TS||TS.phase==="done"){TS={phase:"prep",left:3,work,rest,rounds,round:1};}
+  tEl("tStart").textContent="Pause";beep(330,.1);tRender();
+  TI=setInterval(tTick,1000);
 }
 
 function renderCalories(){
@@ -643,7 +805,7 @@ function drawWeight(id){
 
 function renderProfil(){
   const p=DB.profile;
-  pSex.value=p.sexe;pAge.value=p.age;pHeight.value=p.taille;pWeight.value=p.poidsActuel;
+  pNom.value=p.nom||"";pSex.value=p.sexe;pAge.value=p.age;pHeight.value=p.taille;pWeight.value=p.poidsActuel;
   pGoal.value=p.poidsObjectif;pAct.value=p.activite;
   document.getElementById("pCalcOut").innerHTML=
     "Métabolisme de base : <b>"+Math.round(bmr())+"</b> kcal · Dépense totale : <b>"+Math.round(tdee())+"</b> kcal<br>"+
@@ -685,13 +847,16 @@ document.getElementById("wSave").onclick=()=>{
 };
 document.getElementById("pSave").onclick=()=>{
   const p=DB.profile;
-  p.sexe=pSex.value;p.age=+pAge.value||18;p.taille=+pHeight.value||176;
+  p.nom=pNom.value.trim();p.sexe=pSex.value;p.age=+pAge.value||18;p.taille=+pHeight.value||176;
   p.poidsActuel=+pWeight.value||100;p.poidsObjectif=+pGoal.value||85;p.activite=+pAct.value;
   save();renderProfil();renderDash();toast("Profil enregistré ✓");
 };
 document.getElementById("regenBtn").onclick=()=>regen(iso(viewDate));
 document.getElementById("prevDay").onclick=()=>{viewDate.setDate(viewDate.getDate()-1);renderSessions();};
 document.getElementById("nextDay").onclick=()=>{viewDate.setDate(viewDate.getDate()+1);renderSessions();};
+document.getElementById("tStart").onclick=tStart;
+document.getElementById("tReset").onclick=()=>{TS=null;tResetView();};
+document.getElementById("tClose").onclick=()=>{if(TI){clearInterval(TI);TI=null;}document.getElementById("timerOverlay").style.display="none";};
 
 document.getElementById("exportBtn").onclick=()=>{
   const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});
@@ -712,6 +877,11 @@ document.getElementById("resetBtn").onclick=()=>{
 function renderAll(){renderDash();renderSessions();renderCalories();renderHydra();renderPoids();renderProfil();}
 document.getElementById("todayLabel").textContent=frDate(new Date());
 renderAll();
+if(!localStorage.getItem("fittrack_seen")){
+  localStorage.setItem("fittrack_seen","1");
+  document.querySelector('#nav button[data-v="profil"]').click();
+  setTimeout(()=>toast("Bienvenue 👋 Configure ton profil ici !"),500);
+}
 </script>
 </body>
 </html>
