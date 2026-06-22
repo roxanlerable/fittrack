@@ -15,7 +15,7 @@
   :root{
     --bg:#0d0a18; --card:#1a1430; --card2:#241b40; --line:#372a5e;
     --txt:#f2eefc; --mut:#a99dca; --acc:#a855f7; --acc2:#e879f9; --acc3:#7c3aed;
-    --warn:#fbbf24; --bad:#fb7185; --ok:#4ade80; --rad:18px;
+    --warn:#fbbf24; --bad:#fb7185; --ok:#4ade80; --aqua:#67e8f9; --rad:18px;
     --grad:linear-gradient(135deg,#a855f7 0%,#e879f9 100%);
     --grad2:linear-gradient(135deg,#7c3aed 0%,#a855f7 100%);
   }
@@ -261,6 +261,11 @@
         <button class="btn sec" id="hAddCustom">+ Ajouter</button>
       </div>
     </div>
+    <div class="card">
+      <h2>Historique d'hydratation</h2>
+      <canvas id="hChart" width="700" height="240"></canvas>
+      <div class="muted center" id="hAvg"></div>
+    </div>
   </section>
 
   <section id="poids" class="view">
@@ -325,7 +330,7 @@
   </section>
 
 </main>
-<footer>FitTrack · <b style="color:var(--acc2)">v8</b> · 100% local · tes données ne quittent pas ton appareil</footer>
+<footer>FitTrack · <b style="color:var(--acc2)">v10</b> · 100% local · tes données ne quittent pas ton appareil</footer>
 
 <div id="timerOverlay" class="tov">
   <div class="tbox">
@@ -469,7 +474,6 @@ const STRETCH={
  cardio:[["Étirement mollets au mur","30s / côté"],["Étirement quadriceps debout","30s / côté"],["Étirement ischios","30s / côté"],["Étirement fessiers (figure 4)","30s / côté"],["Étirement hanches (fente basse)","30s / côté"]]
 };
 
-/* ---------- Estimateur calories (base d'aliments locale, /100g) ---------- */
 const FOOD=[
  {k:["blanc de poulet","escalope de poulet","poulet"],kcal:165,p:31,c:0,f:3.6,dg:120},
  {k:["cuisse de poulet"],kcal:209,p:26,c:0,f:11,dg:120},
@@ -557,12 +561,161 @@ const FOOD=[
  {k:["barre chocolatee"],kcal:480,p:5,c:60,f:24,dg:45},
  {k:["croissant"],kcal:406,p:8,c:46,f:21,dg:60},
  {k:["whey","proteine"],kcal:380,p:75,c:8,f:6,dg:30},
- {k:["glace"],kcal:207,p:3.5,c:24,f:11,dg:100}
+ {k:["glace"],kcal:207,p:3.5,c:24,f:11,dg:100},
+ {k:["nouilles de konjac","nouilles konjac","konjac","shirataki"],kcal:8,p:0.5,c:1,f:0,dg:200},
+ {k:["nouilles de riz","vermicelle de riz","vermicelle"],kcal:109,p:2,c:25,f:0.2,dg:200},
+ {k:["nouilles","nouille","pates aux oeufs"],kcal:138,p:5,c:25,f:2,dg:200},
+ {k:["seitan"],kcal:120,p:25,c:4,f:1.5,dg:100},
+ {k:["tempeh"],kcal:193,p:19,c:9,f:11,dg:100},
+ {k:["edamame"],kcal:121,p:11,c:9,f:5,dg:100},
+ {k:["sardine"],kcal:208,p:25,c:0,f:11,dg:100},
+ {k:["maquereau"],kcal:205,p:19,c:0,f:14,dg:100},
+ {k:["truite"],kcal:148,p:21,c:0,f:7,dg:120},
+ {k:["merlu","lieu","haddock"],kcal:90,p:18,c:0,f:1,dg:120},
+ {k:["surimi"],kcal:99,p:8,c:14,f:1,dg:100},
+ {k:["saumon fume"],kcal:180,p:25,c:0,f:9,dg:50},
+ {k:["blanc d'oeuf","blanc d oeuf"],kcal:52,p:11,c:0.7,f:0.2,dg:33},
+ {k:["magret de canard","magret","canard"],kcal:230,p:20,c:0,f:16,dg:120},
+ {k:["agneau"],kcal:294,p:25,c:0,f:21,dg:120},
+ {k:["veau"],kcal:172,p:24,c:0,f:8,dg:120},
+ {k:["chorizo"],kcal:455,p:24,c:2,f:38,dg:30},
+ {k:["salami","saucisson"],kcal:336,p:21,c:1.5,f:27,dg:30},
+ {k:["rillettes","pate"],kcal:330,p:13,c:1,f:30,dg:40},
+ {k:["cordon bleu"],kcal:250,p:15,c:14,f:15,dg:120},
+ {k:["poulet pane","escalope panee"],kcal:240,p:18,c:13,f:13,dg:120},
+ {k:["jambon de dinde","blanc de dinde"],kcal:110,p:18,c:1,f:3,dg:50},
+ {k:["moules"],kcal:86,p:12,c:4,f:2,dg:150},
+ {k:["calamar","calmar","poulpe"],kcal:92,p:16,c:3,f:1.4,dg:120},
+ {k:["crabe"],kcal:97,p:19,c:0,f:1.5,dg:100},
+ {k:["boulgour","boulghour"],kcal:83,p:3,c:18,f:0.2,dg:150},
+ {k:["polenta"],kcal:85,p:2,c:18,f:0.3,dg:150},
+ {k:["patate douce"],kcal:86,p:1.6,c:20,f:0.1,dg:200},
+ {k:["pain pita","pita"],kcal:275,p:9,c:55,f:1.2,dg:60},
+ {k:["pain de mie"],kcal:280,p:8,c:48,f:6,dg:30},
+ {k:["baguette"],kcal:270,p:9,c:55,f:1.5,dg:50},
+ {k:["tortilla","wrap","galette de ble"],kcal:310,p:8,c:50,f:8,dg:60},
+ {k:["naan"],kcal:310,p:9,c:50,f:8,dg:90},
+ {k:["gnocchi"],kcal:160,p:4,c:32,f:1.5,dg:200},
+ {k:["riz basmati"],kcal:130,p:3,c:28,f:0.3,dg:150},
+ {k:["riz complet","riz brun"],kcal:123,p:2.7,c:25,f:1,dg:150},
+ {k:["muesli","granola"],kcal:430,p:9,c:62,f:14,dg:50},
+ {k:["cornflakes","cereales"],kcal:380,p:7,c:84,f:1,dg:40},
+ {k:["biscotte"],kcal:390,p:11,c:75,f:5,dg:20},
+ {k:["galette de riz"],kcal:387,p:8,c:81,f:3,dg:10},
+ {k:["haricots blancs"],kcal:139,p:9,c:25,f:0.5,dg:150},
+ {k:["flageolets"],kcal:130,p:8,c:22,f:0.6,dg:150},
+ {k:["feves"],kcal:110,p:8,c:18,f:0.6,dg:150},
+ {k:["soja","graines de soja"],kcal:173,p:17,c:10,f:9,dg:100},
+ {k:["petit suisse"],kcal:90,p:8,c:4,f:5,dg:60},
+ {k:["cottage cheese"],kcal:98,p:11,c:3,f:4,dg:100},
+ {k:["feta"],kcal:264,p:14,c:4,f:21,dg:40},
+ {k:["parmesan"],kcal:392,p:36,c:3,f:25,dg:20},
+ {k:["chevre"],kcal:364,p:22,c:1,f:30,dg:30},
+ {k:["comte","cantal"],kcal:410,p:27,c:0,f:34,dg:30},
+ {k:["camembert","brie"],kcal:300,p:20,c:0.5,f:24,dg:30},
+ {k:["lait d'amande","lait d amande"],kcal:13,p:0.4,c:0.3,f:1.1,dg:200},
+ {k:["lait d'avoine","lait d avoine"],kcal:46,p:1,c:7,f:1.5,dg:200},
+ {k:["lait de soja"],kcal:43,p:3.3,c:1.8,f:1.8,dg:200},
+ {k:["creme dessert","liegeois"],kcal:130,p:3,c:20,f:4,dg:100},
+ {k:["ananas"],kcal:50,p:0.5,c:13,f:0.1,dg:150},
+ {k:["pasteque"],kcal:30,p:0.6,c:7.6,f:0.2,dg:200},
+ {k:["melon"],kcal:34,p:0.8,c:8,f:0.2,dg:200},
+ {k:["poire"],kcal:57,p:0.4,c:15,f:0.1,dg:150},
+ {k:["peche"],kcal:39,p:0.9,c:10,f:0.3,dg:150},
+ {k:["abricot"],kcal:48,p:1.4,c:11,f:0.4,dg:50},
+ {k:["cerise"],kcal:63,p:1,c:16,f:0.2,dg:100},
+ {k:["framboise"],kcal:52,p:1.2,c:12,f:0.7,dg:100},
+ {k:["myrtille"],kcal:57,p:0.7,c:14,f:0.3,dg:100},
+ {k:["pamplemousse"],kcal:42,p:0.8,c:11,f:0.1,dg:200},
+ {k:["datte"],kcal:282,p:2.5,c:75,f:0.4,dg:24},
+ {k:["figue"],kcal:74,p:0.8,c:19,f:0.3,dg:50},
+ {k:["grenade"],kcal:83,p:1.7,c:19,f:1.2,dg:150},
+ {k:["litchi"],kcal:66,p:0.8,c:17,f:0.4,dg:100},
+ {k:["fruit de la passion","maracuja"],kcal:97,p:2.2,c:23,f:0.7,dg:60},
+ {k:["papaye"],kcal:43,p:0.5,c:11,f:0.3,dg:150},
+ {k:["noix de coco"],kcal:354,p:3.3,c:15,f:33,dg:40},
+ {k:["pruneaux"],kcal:240,p:2.2,c:64,f:0.4,dg:30},
+ {k:["raisins secs"],kcal:299,p:3,c:79,f:0.5,dg:30},
+ {k:["clementine","mandarine"],kcal:53,p:0.8,c:13,f:0.3,dg:80},
+ {k:["aubergine"],kcal:25,p:1,c:6,f:0.2,dg:150},
+ {k:["chou-fleur","chou fleur"],kcal:25,p:1.9,c:5,f:0.3,dg:150},
+ {k:["chou"],kcal:25,p:1.3,c:6,f:0.1,dg:150},
+ {k:["champignon"],kcal:22,p:3.1,c:3.3,f:0.3,dg:100},
+ {k:["petits pois"],kcal:81,p:5,c:14,f:0.4,dg:150},
+ {k:["mais"],kcal:96,p:3.4,c:21,f:1.5,dg:100},
+ {k:["betterave"],kcal:43,p:1.6,c:10,f:0.2,dg:100},
+ {k:["concombre"],kcal:15,p:0.7,c:3.6,f:0.1,dg:100},
+ {k:["asperge"],kcal:20,p:2.2,c:3.9,f:0.1,dg:120},
+ {k:["poireau"],kcal:61,p:1.5,c:14,f:0.3,dg:120},
+ {k:["olive"],kcal:115,p:0.8,c:6,f:11,dg:30},
+ {k:["noisette"],kcal:628,p:15,c:17,f:61,dg:30},
+ {k:["pistache"],kcal:562,p:20,c:28,f:45,dg:30},
+ {k:["noix de cajou","cajou"],kcal:553,p:18,c:30,f:44,dg:30},
+ {k:["graines de chia","chia"],kcal:486,p:17,c:42,f:31,dg:15,spoon:12},
+ {k:["graines de lin"],kcal:534,p:18,c:29,f:42,dg:15,spoon:12},
+ {k:["graines de courge"],kcal:559,p:30,c:11,f:49,dg:30},
+ {k:["beurre de cacahuete","beurre de cacahuetes"],kcal:588,p:25,c:20,f:50,dg:20,spoon:18},
+ {k:["tahini","puree de sesame"],kcal:595,p:17,c:21,f:54,dg:15,spoon:15},
+ {k:["huile de coco"],kcal:892,p:0,c:0,f:99,dg:10,spoon:12},
+ {k:["vinaigrette"],kcal:450,p:0.5,c:5,f:48,dg:15,spoon:15},
+ {k:["moutarde"],kcal:66,p:4,c:5,f:4,dg:10,spoon:10},
+ {k:["sauce soja"],kcal:60,p:6,c:6,f:0,dg:10,spoon:10},
+ {k:["pesto"],kcal:450,p:5,c:6,f:46,dg:20,spoon:15},
+ {k:["houmous","hummus"],kcal:177,p:8,c:14,f:10,dg:50},
+ {k:["pancake"],kcal:227,p:6,c:28,f:9,dg:60},
+ {k:["gaufre"],kcal:290,p:6,c:38,f:13,dg:80},
+ {k:["muffin"],kcal:380,p:5,c:50,f:18,dg:80},
+ {k:["donut","beignet"],kcal:400,p:5,c:50,f:20,dg:70},
+ {k:["brownie"],kcal:470,p:6,c:55,f:25,dg:60},
+ {k:["pain au chocolat","chocolatine"],kcal:430,p:7,c:45,f:24,dg:70},
+ {k:["madeleine"],kcal:450,p:6,c:55,f:23,dg:25},
+ {k:["compote"],kcal:55,p:0.3,c:13,f:0.1,dg:100},
+ {k:["smoothie"],kcal:60,p:1,c:13,f:0.5,dg:250},
+ {k:["milkshake"],kcal:110,p:3,c:18,f:3,dg:300},
+ {k:["pop-corn","popcorn"],kcal:387,p:13,c:78,f:5,dg:30},
+ {k:["cheesecake"],kcal:321,p:6,c:26,f:22,dg:100},
+ {k:["tiramisu"],kcal:240,p:4,c:25,f:13,dg:100},
+ {k:["mousse au chocolat"],kcal:200,p:4,c:25,f:10,dg:100},
+ {k:["riz au lait"],kcal:120,p:3,c:20,f:3,dg:150},
+ {k:["flan","creme caramel"],kcal:120,p:4,c:20,f:3,dg:120},
+ {k:["jus de pomme"],kcal:46,p:0.1,c:11,f:0.1,dg:200},
+ {k:["limonade"],kcal:38,p:0,c:9.6,f:0,dg:330},
+ {k:["energy drink","red bull"],kcal:45,p:0,c:11,f:0,dg:250},
+ {k:["chocolat chaud"],kcal:90,p:3,c:13,f:3,dg:200},
+ {k:["cafe au lait","cappuccino","latte"],kcal:40,p:2,c:4,f:1.5,dg:200},
+ {k:["vin"],kcal:83,p:0.1,c:2.6,f:0,dg:120},
+ {k:["eau"],kcal:0,p:0,c:0,f:0,dg:250},
+ {k:["ramen"],kcal:110,p:5,c:16,f:3,dg:400},
+ {k:["pad thai"],kcal:150,p:7,c:20,f:5,dg:350},
+ {k:["curry de poulet","curry"],kcal:130,p:8,c:10,f:6,dg:350},
+ {k:["dahl","dal"],kcal:120,p:6,c:18,f:3,dg:300},
+ {k:["falafel"],kcal:333,p:13,c:32,f:18,dg:60},
+ {k:["samoussa","samossa"],kcal:280,p:6,c:30,f:15,dg:40},
+ {k:["nem","rouleau de printemps"],kcal:180,p:6,c:20,f:8,dg:60},
+ {k:["poke bowl","poke"],kcal:150,p:9,c:18,f:5,dg:400},
+ {k:["paella"],kcal:160,p:8,c:20,f:5,dg:350},
+ {k:["risotto"],kcal:170,p:4,c:24,f:6,dg:300},
+ {k:["chili con carne","chili"],kcal:140,p:9,c:13,f:5,dg:300},
+ {k:["tacos"],kcal:230,p:9,c:24,f:11,dg:250},
+ {k:["burrito"],kcal:210,p:8,c:25,f:8,dg:300},
+ {k:["gyoza","raviolis","dumpling"],kcal:210,p:8,c:24,f:9,dg:150},
+ {k:["tempura"],kcal:200,p:7,c:18,f:11,dg:150},
+ {k:["croque-monsieur","croque monsieur"],kcal:280,p:14,c:22,f:15,dg:180},
+ {k:["hot-dog","hot dog"],kcal:250,p:10,c:22,f:14,dg:120},
+ {k:["panini"],kcal:260,p:11,c:30,f:10,dg:200},
+ {k:["bagel"],kcal:250,p:10,c:48,f:3,dg:90},
+ {k:["omelette"],kcal:154,p:11,c:1,f:12,dg:120},
+ {k:["gratin dauphinois","gratin"],kcal:160,p:4,c:14,f:10,dg:200},
+ {k:["hachis parmentier"],kcal:130,p:7,c:13,f:5,dg:300},
+ {k:["tartiflette"],kcal:180,p:7,c:13,f:11,dg:300},
+ {k:["raclette"],kcal:360,p:23,c:1,f:29,dg:40},
+ {k:["moussaka"],kcal:130,p:6,c:8,f:8,dg:300},
+ {k:["ratatouille"],kcal:50,p:1.3,c:7,f:2,dg:200}
 ];
 const NUM={un:1,une:1,deux:2,trois:3,quatre:4,cinq:5,six:6,demi:0.5};
 function norm(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");}
 function estimateMeal(text){
-  let kcal=0,p=0,c=0,f=0;const got=[];
+  let kcal=0,p=0,c=0,f=0;const got=[],missed=[];
   text.split(/[,\n;+]|\bet\b|\bavec\b/i).forEach(raw=>{
     const s=norm(raw).trim();if(!s)return;
     let grams=null;
@@ -575,7 +728,7 @@ function estimateMeal(text){
     const spoon=/cuiller|cuillere|c\.\s?a|cas\b|cac\b/.test(s);
     let food=null,best=0;
     for(const fd of FOOD){for(const a of fd.k){const an=norm(a);if(s.includes(an)&&an.length>best){food=fd;best=an.length;}}}
-    if(!food)return;
+    if(!food){if(s.length>1)missed.push(raw.trim());return;}
     let g;
     if(grams!==null)g=grams;
     else if(spoon)g=(count||1)*(food.spoon||12);
@@ -583,7 +736,7 @@ function estimateMeal(text){
     else g=food.dg||100;
     kcal+=g/100*food.kcal;p+=g/100*food.p;c+=g/100*food.c;f+=g/100*food.f;got.push(food.k[0]);
   });
-  return{kcal:Math.round(kcal),p:Math.round(p),c:Math.round(c),f:Math.round(f),got};
+  return{kcal:Math.round(kcal),p:Math.round(p),c:Math.round(c),f:Math.round(f),got,missed};
 }
 
 function esc(s){return String(s).replace(/'/g,"\\'");}
@@ -771,7 +924,6 @@ function confetti(){
   for(let i=0;i<40;i++){const sp=document.createElement("span");sp.className="confetti";sp.style.left=Math.random()*100+"vw";sp.style.background=colors[i%colors.length];sp.style.animationDelay=(Math.random()*0.35)+"s";sp.style.height=(10+Math.random()*8)+"px";document.body.appendChild(sp);setTimeout(()=>sp.remove(),2800);}
 }
 
-/* ---------- Minuteur ---------- */
 let AC=null;
 function ensureAudio(){try{if(!AC){const A=window.AudioContext||window.webkitAudioContext;if(A)AC=new A();}if(AC&&AC.state==="suspended")AC.resume();}catch(e){}}
 function beep(f,d){if(!AC)return;try{const o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);o.type="sine";o.frequency.value=f;const t=AC.currentTime;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.4,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.start(t);o.stop(t+d+0.02);}catch(e){}}
@@ -803,9 +955,14 @@ function renderHydra(){
   document.getElementById("hBar").style.width=Math.min(100,d.water/tgt*100)+"%";
   const full=Math.floor(d.water/250),goalG=Math.round(tgt/250);let g="";for(let i=0;i<goalG;i++)g+=i<full?"🟣":"⚪";
   document.getElementById("hGlasses").textContent=g;
+  drawWater("hChart");
+  const ws=waterSeries();
+  if(ws.length){const avg=ws.reduce((a,b)=>a+b.v,0)/ws.length;document.getElementById("hAvg").textContent="Moyenne : "+avg.toFixed(2)+" L/jour sur "+ws.length+" jour"+(ws.length>1?"s":"");}
+  else document.getElementById("hAvg").textContent="";
 }
 
 function weightSeries(){return Object.keys(DB.days).filter(k=>DB.days[k].weight).sort().map(k=>({d:k,v:+DB.days[k].weight}));}
+function waterSeries(){return Object.keys(DB.days).filter(k=>DB.days[k].water>0).sort().map(k=>({d:k,v:DB.days[k].water/1000}));}
 function renderPoids(){
   drawWeight("wChart");const s=weightSeries();
   document.getElementById("wStart").textContent=s.length?s[0].v:"—";
@@ -827,21 +984,37 @@ function drawWeight(id){
   let t0=Math.min(...times),t1=Math.max(...times);if(t0===t1){t0-=86400000;t1+=86400000;}
   const X=t=>padL+(W-padL-padR)*((t-t0)/(t1-t0));
   const Y=v=>padT+(H-padT-padB)*(1-(v-mn)/(mx-mn));
-  // grille + axe Y (poids)
   ctx.strokeStyle="#372a5e";ctx.lineWidth=1;ctx.fillStyle="#a99dca";ctx.font="11px sans-serif";ctx.textAlign="right";
   for(let i=0;i<=4;i++){const v=mn+(mx-mn)*i/4;const yy=Y(v);ctx.beginPath();ctx.moveTo(padL,yy);ctx.lineTo(W-padR,yy);ctx.stroke();ctx.fillText(v.toFixed(1),padL-6,yy+4);}
-  // ligne objectif
   if(goal){ctx.strokeStyle="#e879f9";ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(padL,Y(goal));ctx.lineTo(W-padR,Y(goal));ctx.stroke();ctx.setLineDash([]);ctx.fillStyle="#e879f9";ctx.textAlign="left";ctx.fillText("objectif "+goal,padL+4,Y(goal)-5);}
-  // axe X = temps (dates)
   ctx.fillStyle="#a99dca";ctx.font="10px sans-serif";ctx.textAlign="center";
   const fmt=ts=>{const d=new Date(ts);return d.getDate()+"/"+(d.getMonth()+1);};
-  ctx.fillText(fmt(t0),X(t0),H-8);
-  if(s.length>2)ctx.fillText(fmt((t0+t1)/2),X((t0+t1)/2),H-8);
-  ctx.fillText(fmt(t1),X(t1),H-8);
-  // courbe poids dans le temps
+  ctx.fillText(fmt(t0),X(t0),H-8);if(s.length>2)ctx.fillText(fmt((t0+t1)/2),X((t0+t1)/2),H-8);ctx.fillText(fmt(t1),X(t1),H-8);
   ctx.strokeStyle="#a855f7";ctx.lineWidth=2.5;ctx.beginPath();
   s.forEach((p,i)=>{const xx=X(times[i]),yy=Y(p.v);i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);});ctx.stroke();
   ctx.fillStyle="#a855f7";s.forEach((p,i)=>{ctx.beginPath();ctx.arc(X(times[i]),Y(p.v),3.5,0,7);ctx.fill();});
+}
+function drawWater(id){
+  const c=document.getElementById(id);if(!c)return;const ctx=c.getContext("2d");
+  const W=c.width,H=c.height;ctx.clearRect(0,0,W,H);
+  const s=waterSeries();const padL=42,padR=14,padT=14,padB=26;
+  if(s.length<1){ctx.fillStyle="#a99dca";ctx.font="14px sans-serif";ctx.textAlign="center";ctx.fillText("Bois de l'eau pour voir l'historique",W/2,H/2);return;}
+  const goal=waterTarget()/1000;
+  let mx=Math.max(goal,...s.map(p=>p.v))*1.15;if(mx<=0)mx=1;
+  const times=s.map(p=>new Date(p.d+"T12:00:00").getTime());
+  let t0=Math.min(...times),t1=Math.max(...times);if(t0===t1){t0-=86400000;t1+=86400000;}
+  const X=t=>padL+(W-padL-padR)*((t-t0)/(t1-t0));
+  const Y=v=>padT+(H-padT-padB)*(1-v/mx);
+  ctx.strokeStyle="#372a5e";ctx.lineWidth=1;ctx.fillStyle="#a99dca";ctx.font="11px sans-serif";ctx.textAlign="right";
+  for(let i=0;i<=4;i++){const v=mx*i/4;const yy=Y(v);ctx.beginPath();ctx.moveTo(padL,yy);ctx.lineTo(W-padR,yy);ctx.stroke();ctx.fillText(v.toFixed(1)+"L",padL-6,yy+4);}
+  ctx.strokeStyle="#67e8f9";ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(padL,Y(goal));ctx.lineTo(W-padR,Y(goal));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle="#67e8f9";ctx.textAlign="left";ctx.fillText("objectif "+goal.toFixed(1)+"L",padL+4,Y(goal)-5);
+  ctx.fillStyle="#a99dca";ctx.font="10px sans-serif";ctx.textAlign="center";
+  const fmt=ts=>{const d=new Date(ts);return d.getDate()+"/"+(d.getMonth()+1);};
+  ctx.fillText(fmt(t0),X(t0),H-8);if(s.length>2)ctx.fillText(fmt((t0+t1)/2),X((t0+t1)/2),H-8);ctx.fillText(fmt(t1),X(t1),H-8);
+  ctx.strokeStyle="#67e8f9";ctx.lineWidth=2.5;ctx.beginPath();
+  s.forEach((p,i)=>{const xx=X(times[i]),yy=Y(p.v);i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);});ctx.stroke();
+  ctx.fillStyle="#67e8f9";s.forEach((p,i)=>{ctx.beginPath();ctx.arc(X(times[i]),Y(p.v),3.5,0,7);ctx.fill();});
 }
 
 function renderProfil(){
@@ -868,7 +1041,8 @@ document.getElementById("estBtn").onclick=()=>{
   if(!r.got.length){toast("Aliment non reconnu — saisis à la main");return;}
   if(!fName.value.trim())fName.value=txt.slice(0,40);
   fKcal.value=r.kcal;fProt.value=r.p;fGluc.value=r.c;fLip.value=r.f;
-  toast("≈ "+r.kcal+" kcal · "+[...new Set(r.got)].join(", "));
+  let msg="≈ "+r.kcal+" kcal";if(r.got.length)msg+=" · "+[...new Set(r.got)].join(", ");if(r.missed&&r.missed.length)msg+=" · ⚠ non reconnu : "+r.missed.join(", ");
+  toast(msg);
 };
 document.getElementById("addFood").onclick=()=>{
   const name=fName.value.trim(),kcal=+fKcal.value;
