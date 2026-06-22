@@ -199,7 +199,7 @@
         <button class="btn sec" id="prevDay">◀ Hier</button>
         <button class="btn sec" id="nextDay">Demain ▶</button>
       </div>
-      <div class="hint">Une nouvelle séance matin (1h) + après-midi (1h) est générée automatiquement chaque jour à partir de ton matériel et de ton objectif de recomposition. Coche les exercices au fur et à mesure.</div>
+      <div class="hint">Une nouvelle séance matin (1h) + après-midi (1h) est générée automatiquement chaque jour. La rotation laisse chaque muscle récupérer ~72h. Coche les exercices au fur et à mesure.</div>
     </div>
     <div class="card">
       <h2>Historique séances</h2>
@@ -403,9 +403,16 @@ const EX=[
  {n:"Relevés de jambes au sol",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé sur le dos, jambes tendues. Monte-les jusqu'à la verticale puis redescends sans toucher le sol."},
  {n:"Russian twists",g:"core",e:["dumbbell","bodyweight"],t:"isol",img:"",how:"Assis, buste penché en arrière, pieds décollés. Fais tourner le buste d'un côté à l'autre (avec ou sans poids)."},
  {n:"Crunch au sol",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, genoux fléchis. Décolle les épaules en contractant les abdos, redescends sans poser complètement la tête."},
+ {n:"Reverse crunch (relevé de bassin)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, genoux fléchis vers la poitrine. Décolle le bassin du sol en enroulant le bas du dos, redescends contrôlé. Cible le bas des abdos."},
+ {n:"Bicyclette (pédalo abdos)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, pédale dans le vide en amenant le coude vers le genou opposé, en alternance, sans tirer sur la nuque."},
+ {n:"V-ups (relevé buste + jambes)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, monte simultanément buste et jambes tendues pour former un V, touche les pieds, redescends sans poser."},
+ {n:"Dead bug",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Sur le dos, bras et genoux levés. Descends le bras et la jambe opposés vers le sol sans cambrer le dos, alterne. Gainage profond."},
+ {n:"Planche avec touch épaules",g:"core",e:["bodyweight"],t:"isol",img:"",how:"En planche bras tendus, touche alternativement chaque épaule avec la main opposée sans bouger le bassin."},
+ {n:"Relevés de jambes au sol (bas-ventre)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, mains sous les fessiers, jambes tendues. Monte-les à la verticale puis redescends lentement sans toucher le sol."},
  {n:"Mountain climbers",g:"core",e:["bodyweight"],t:"cardio",img:"",how:"En position de pompe, ramène alternativement les genoux vers la poitrine rapidement. Gainage + cardio."},
- {n:"Vélo — endurance (zone 2, 20–30 min)",g:"cardio",e:["bike"],t:"cardio",img:"",how:"Pédale à intensité modérée et constante (tu peux encore parler) 20-30 min. Idéal pour brûler du gras."},
- {n:"Vélo — intervalles (sprints 30s/30s)",g:"cardio",e:["bike"],t:"cardio",img:"",how:"Alterne 30 s de sprint intense et 30 s de récup facile, pendant 10-15 min. Très efficace pour la perte de gras."},
+ {n:"Course à pied — endurance (20–30 min)",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Cours à allure modérée et régulière (tu peux tenir une conversation) pendant 20-30 min. Idéal pour brûler du gras."},
+ {n:"Course à pied — fractionné (30s vite / 1 min lent)",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Après 5 min d'échauffement, alterne 30 s de course rapide et 1 min de footing lent, sur 12-15 min. Très efficace pour la perte de gras."},
+ {n:"Course à pied — sprints courts",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Après échauffement, enchaîne 8-10 sprints de 20-30 s à fond, avec récupération complète (marche) entre chaque."},
  {n:"Burpees",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Squat mains au sol, saute les pieds en arrière (planche), une pompe, ramène les pieds, saute en l'air."},
  {n:"Kettlebell / haltère swings",g:"cardio",e:["kettlebell","dumbbell"],t:"cardio",img:"",how:"Poids entre les jambes, propulse-le devant toi jusqu'à hauteur d'épaule via une poussée explosive des hanches."},
  {n:"Thrusters haltères",g:"cardio",e:["dumbbell"],t:"cardio",img:"",how:"Squat haltères aux épaules, puis en remontant pousse les haltères au-dessus de la tête. Enchaîne."},
@@ -425,10 +432,15 @@ function detailHTML(name){
 function toggleInfo(btn){const d=btn.nextElementSibling;if(!d)return;const open=d.style.display!=="none";
   d.style.display=open?"none":"block";btn.textContent=open?"ⓘ Comment faire":"▲ Masquer";}
 
+// Rotation : chaque muscle 2x/semaine, espacé d'env. 72h, jamais 2x le même jour.
 const PLAN={
- 1:{am:"pecs",pm:"dos"}, 2:{am:"jambes",pm:"epaules"}, 3:{am:"bras",pm:"core"},
- 4:{am:"dos",pm:"pecs"}, 5:{am:"epaules",pm:"jambes"}, 6:{am:"core",pm:"bras"},
- 0:{am:"cardio",pm:"jambes"}
+ 1:{am:"pecs",pm:"jambes"},   // Lun
+ 2:{am:"dos",pm:"epaules"},   // Mar
+ 3:{am:"bras",pm:"core"},     // Mer
+ 4:{am:"cardio",pm:"pecs"},   // Jeu
+ 5:{am:"jambes",pm:"dos"},    // Ven
+ 6:{am:"epaules",pm:"bras"},  // Sam
+ 0:{am:"core",pm:"cardio"}    // Dim
 };
 const GLABEL={pecs:"Pectoraux",dos:"Dos",jambes:"Jambes / fessiers",epaules:"Épaules",bras:"Bras",core:"Abdos / gainage",cardio:"Cardio / conditionnement"};
 
@@ -438,26 +450,38 @@ function shuffle(arr,rnd){const a=arr.slice();for(let i=a.length-1;i>0;i--){cons
 function avail(){return DB.profile.equip||[];}
 function exFor(group){const av=avail();return EX.filter(x=>x.g===group&&x.e.some(t=>av.includes(t)));}
 
+function availCardio(){return EX.filter(x=>x.g==="cardio"&&x.e.some(t=>avail().includes(t)));}
 function buildSession(group,slot,salt){
   const rnd=seedRand(slot+group+salt);
   let pool=exFor(group);
   if(pool.length<3){pool=pool.concat(EX.filter(x=>x.e.includes("bodyweight")&&!pool.includes(x)));}
-  const comp=shuffle(pool.filter(x=>x.t==="compound"),rnd);
-  const isol=shuffle(pool.filter(x=>x.t==="isol"),rnd);
-  const card=shuffle(EX.filter(x=>x.g==="cardio"&&x.e.some(t=>avail().includes(t))),rnd);
   const out=[];
   out.push({txt:"Échauffement progressif",meta:"6–8 min cardio léger + mobilité articulaire",warm:true});
   if(group==="cardio"){
-    const c=shuffle(EX.filter(x=>x.g==="cardio"&&x.e.some(t=>avail().includes(t))),rnd).concat(comp);
-    for(let i=0;i<5&&i<c.length;i++) out.push({txt:c[i].n,meta:"45s effort / 15s repos × 4 tours",note:"Intensité élevée — recomposition"});
-    out.push({txt:"Gainage planche",meta:"3 × 45s",note:"Finisher core"});
+    const runs=shuffle(EX.filter(x=>x.n.indexOf("Course")===0),rnd);
+    const hiit=shuffle(availCardio().filter(x=>x.n.indexOf("Course")!==0),rnd);
+    if(runs[0]) out.push({txt:runs[0].n,meta:"Séance principale",note:"Cardio course — recomposition"});
+    for(let i=0;i<3&&i<hiit.length;i++) out.push({txt:hiit[i].n,meta:"45s effort / 15s repos × 4 tours",note:"Finisher HIIT"});
+    out.push({txt:"Gainage planche",meta:"3 × 45s",note:"Finisher abdos"});
+  } else if(group==="core"){
+    const cc=shuffle(pool.filter(x=>x.t==="isol"),rnd);
+    const schemes=["3 × 20 reps","3 × 45s","3 × 15 / côté","4 × 20 reps","3 × 30s"];
+    for(let i=0;i<5&&i<cc.length;i++) out.push({txt:cc[i].n,meta:schemes[i%schemes.length],note:"Abdos / gainage"});
+    const fin=shuffle(availCardio().filter(x=>x.n.indexOf("Course")!==0),rnd)[0];
+    if(fin) out.push({txt:fin.n,meta:"4 tours · 40s / 20s",note:"Finisher brûle-graisses"});
   } else {
+    const comp=shuffle(pool.filter(x=>x.t==="compound"),rnd);
+    const isol=shuffle(pool.filter(x=>x.t==="isol"),rnd);
+    const card=shuffle(availCardio().filter(x=>x.n.indexOf("Course")!==0),rnd);
     if(comp[0]) out.push({txt:comp[0].n,meta:"4 séries × 5–6 reps · récup 2–3 min",note:"Force — lourd, technique propre"});
     if(comp[1]) out.push({txt:comp[1].n,meta:"4 × 8–10 · récup 90s",note:"Hypertrophie"});
     if(comp[2]||isol[0]){const e=comp[2]||isol[0];out.push({txt:e.n,meta:"3 × 10–12 · récup 75s",note:"Hypertrophie"});}
     if(isol[0]&&isol[0]!==(comp[2])) out.push({txt:isol[0].n,meta:"3 × 12–15 · récup 60s",note:"Isolation — congestion"});
     if(isol[1]) out.push({txt:isol[1].n,meta:"3 × 12–15 · récup 60s",note:"Isolation"});
     if(card[0]) out.push({txt:card[0].n,meta:"4 tours · 40s / 20s",note:"Finisher brûle-graisses (recomp)"});
+    const absRnd=seedRand(salt+group+slot+"abs");
+    const abs=shuffle(EX.filter(x=>x.g==="core"&&x.t==="isol"&&x.e.some(t=>avail().includes(t))),absRnd)[0];
+    if(abs) out.push({txt:abs.n,meta:"3 × 15–20 · récup 45s",note:"Finisher abdos"});
   }
   out.push({txt:"Retour au calme + étirements",meta:"5 min",warm:true});
   return out.map(o=>({...o,done:false}));
