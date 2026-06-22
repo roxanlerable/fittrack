@@ -130,6 +130,15 @@
     pointer-events:none;animation:confettiFall 2.3s linear forwards}
   @keyframes confettiFall{0%{opacity:1}to{transform:translateY(108vh) rotate(620deg);opacity:.15}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* fiche exercice */
+  .exohead{cursor:pointer}
+  .info{margin-top:9px;background:rgba(168,85,247,.16);color:var(--acc2);border:1px solid var(--line);
+    border-radius:10px;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer}
+  .exodetail{margin-top:10px;border-top:1px solid var(--line);padding-top:11px;animation:cardin .3s ease}
+  .exoimg{width:100%;max-width:300px;border-radius:12px;display:block;margin:0 auto 10px;background:#fff}
+  .how{font-size:13px;color:var(--txt);line-height:1.55}
+  .vidlink{display:inline-block;margin-top:11px;color:#fff;background:var(--grad2);padding:8px 13px;
+    border-radius:10px;font-size:13px;font-weight:700;text-decoration:none}
 </style>
 </head>
 <body>
@@ -350,65 +359,71 @@ const QUOTES=[
 ];
 
 const EX=[
- {n:"Développé couché haltères",g:"pecs",e:["dumbbell"],t:"compound"},
- {n:"Développé incliné haltères",g:"pecs",e:["dumbbell"],t:"compound"},
- {n:"Écarté haltères",g:"pecs",e:["dumbbell"],t:"isol"},
- {n:"Développé couché barre",g:"pecs",e:["barbell"],t:"compound"},
- {n:"Pompes sur poignées (amplitude max)",g:"pecs",e:["handles"],t:"compound"},
- {n:"Pompes lestées / déclinées",g:"pecs",e:["bodyweight"],t:"compound"},
- {n:"Écarté poulie",g:"pecs",e:["cable"],t:"isol"},
- {n:"Pompes avec élastique",g:"pecs",e:["band"],t:"isol"},
- {n:"Rowing haltère unilatéral",g:"dos",e:["dumbbell"],t:"compound"},
- {n:"Rowing haltères (deux bras)",g:"dos",e:["dumbbell"],t:"compound"},
- {n:"Soulevé de terre haltères",g:"dos",e:["dumbbell"],t:"compound"},
- {n:"Pull-over haltère",g:"dos",e:["dumbbell"],t:"isol"},
- {n:"Tractions pronation",g:"dos",e:["pullup"],t:"compound"},
- {n:"Tractions supination",g:"dos",e:["pullup"],t:"compound"},
- {n:"Rowing barre buste penché",g:"dos",e:["barbell"],t:"compound"},
- {n:"Tirage poulie haute",g:"dos",e:["cable"],t:"compound"},
- {n:"Rowing élastique",g:"dos",e:["band"],t:"isol"},
- {n:"Superman / extensions lombaires",g:"dos",e:["bodyweight"],t:"isol"},
- {n:"Squat gobelet",g:"jambes",e:["dumbbell","kettlebell"],t:"compound"},
- {n:"Soulevé de terre roumain haltères",g:"jambes",e:["dumbbell"],t:"compound"},
- {n:"Fentes marchées",g:"jambes",e:["dumbbell","bodyweight"],t:"compound"},
- {n:"Fentes bulgares",g:"jambes",e:["dumbbell","bodyweight"],t:"compound"},
- {n:"Hip thrust",g:"jambes",e:["dumbbell","bodyweight"],t:"compound"},
- {n:"Leg extension (extension de jambes assis)",g:"jambes",e:["legext"],t:"isol"},
- {n:"Leg extension unilatéral",g:"jambes",e:["legext"],t:"isol"},
- {n:"Squat barre",g:"jambes",e:["barbell"],t:"compound"},
- {n:"Mollets debout (haltères)",g:"jambes",e:["dumbbell","bodyweight"],t:"isol"},
- {n:"Wall sit / chaise",g:"jambes",e:["bodyweight"],t:"isol"},
- {n:"Développé épaules haltères",g:"epaules",e:["dumbbell"],t:"compound"},
- {n:"Développé Arnold",g:"epaules",e:["dumbbell"],t:"compound"},
- {n:"Élévations latérales",g:"epaules",e:["dumbbell","band"],t:"isol"},
- {n:"Oiseau (deltoïde postérieur)",g:"epaules",e:["dumbbell","band"],t:"isol"},
- {n:"Élévations frontales haltères",g:"epaules",e:["dumbbell"],t:"isol"},
- {n:"Développé militaire barre",g:"epaules",e:["barbell"],t:"compound"},
- {n:"Pike push-ups",g:"epaules",e:["bodyweight","handles"],t:"compound"},
- {n:"Curl haltères alterné",g:"bras",e:["dumbbell"],t:"isol"},
- {n:"Curl marteau",g:"bras",e:["dumbbell"],t:"isol"},
- {n:"Extension nuque haltère",g:"bras",e:["dumbbell"],t:"isol"},
- {n:"Kickback triceps haltère",g:"bras",e:["dumbbell"],t:"isol"},
- {n:"Pompes serrées sur poignées",g:"bras",e:["handles"],t:"compound"},
- {n:"Pompes diamant (serrées)",g:"bras",e:["bodyweight"],t:"compound"},
- {n:"Curl barre",g:"bras",e:["barbell"],t:"isol"},
- {n:"Extension triceps poulie",g:"bras",e:["cable"],t:"isol"},
- {n:"Curl élastique",g:"bras",e:["band"],t:"isol"},
- {n:"Gainage planche",g:"core",e:["bodyweight"],t:"isol"},
- {n:"Gainage latéral",g:"core",e:["bodyweight"],t:"isol"},
- {n:"Relevés de jambes au sol",g:"core",e:["bodyweight"],t:"isol"},
- {n:"Russian twists",g:"core",e:["dumbbell","bodyweight"],t:"isol"},
- {n:"Hollow hold",g:"core",e:["bodyweight"],t:"isol"},
- {n:"Mountain climbers",g:"core",e:["bodyweight"],t:"cardio"},
- {n:"Vélo — endurance (zone 2, 20–30 min)",g:"cardio",e:["bike"],t:"cardio"},
- {n:"Vélo — intervalles (sprints 30s/30s)",g:"cardio",e:["bike"],t:"cardio"},
- {n:"Burpees",g:"cardio",e:["bodyweight"],t:"cardio"},
- {n:"Kettlebell / haltère swings",g:"cardio",e:["kettlebell","dumbbell"],t:"cardio"},
- {n:"Thrusters haltères",g:"cardio",e:["dumbbell"],t:"cardio"},
- {n:"Squats sautés",g:"cardio",e:["bodyweight"],t:"cardio"},
- {n:"Montées de genoux / corde à sauter",g:"cardio",e:["bodyweight"],t:"cardio"},
- {n:"Fentes sautées",g:"cardio",e:["bodyweight"],t:"cardio"}
+ {n:"Développé couché haltères",g:"pecs",e:["dumbbell"],t:"compound",img:"Dumbbell_Bench_Press",how:"Allongé sur le dos (banc ou sol), haltères au niveau de la poitrine, coudes ~45°. Pousse vers le haut jusqu'à tendre les bras, puis redescends lentement."},
+ {n:"Développé incliné haltères",g:"pecs",e:["dumbbell"],t:"compound",img:"Incline_Dumbbell_Press",how:"Sur un plan incliné (~30°), haltères aux épaules, pousse vers le haut et l'avant. Cible le haut des pectoraux."},
+ {n:"Écarté haltères",g:"pecs",e:["dumbbell"],t:"isol",img:"",how:"Allongé, bras légèrement fléchis, ouvre les bras en arc de cercle puis ramène les haltères au-dessus de la poitrine. Contrôle la descente."},
+ {n:"Pompes sur poignées (amplitude max)",g:"pecs",e:["handles"],t:"compound",img:"",how:"Mains sur les poignées, corps gainé et droit. Descends la poitrine plus bas que les mains pour un max d'amplitude, puis remonte."},
+ {n:"Pompes lestées / déclinées",g:"pecs",e:["bodyweight"],t:"compound",img:"",how:"Pieds surélevés (ou un lest sur le dos). Descends en gardant le corps bien droit, remonte en poussant fort."},
+ {n:"Écarté poulie",g:"pecs",e:["cable"],t:"isol",img:"",how:"Aux poulies, ramène les poignées devant toi en arc de cercle, en contractant les pectoraux."},
+ {n:"Rowing haltère unilatéral",g:"dos",e:["dumbbell"],t:"compound",img:"",how:"Un genou et une main en appui sur un banc, dos plat. Tire l'haltère vers la hanche en serrant l'omoplate, redescends contrôlé."},
+ {n:"Rowing haltères (deux bras)",g:"dos",e:["dumbbell"],t:"compound",img:"Bent_Over_Two-Dumbbell_Row",how:"Buste penché ~45°, dos plat, bras tendus. Tire les deux haltères vers le bas des côtes en serrant les omoplates."},
+ {n:"Soulevé de terre haltères",g:"dos",e:["dumbbell"],t:"compound",img:"Stiff-Legged_Dumbbell_Deadlift",how:"Haltères devant les cuisses, dos droit. Descends en poussant les hanches en arrière, remonte en contractant fessiers et dos."},
+ {n:"Pull-over haltère",g:"dos",e:["dumbbell"],t:"isol",img:"",how:"Allongé, un haltère tenu à deux mains au-dessus de la poitrine. Descends-le derrière la tête bras semi-tendus, puis ramène."},
+ {n:"Tractions pronation",g:"dos",e:["pullup"],t:"compound",img:"",how:"Suspendu à la barre, paumes vers l'avant. Tire-toi jusqu'à passer le menton au-dessus de la barre, redescends contrôlé."},
+ {n:"Tractions supination",g:"dos",e:["pullup"],t:"compound",img:"",how:"Comme les tractions mais paumes vers toi : sollicite davantage les biceps."},
+ {n:"Rowing barre buste penché",g:"dos",e:["barbell"],t:"compound",img:"",how:"Buste penché, dos plat, tire la barre vers le nombril en serrant les omoplates."},
+ {n:"Tirage poulie haute",g:"dos",e:["cable"],t:"compound",img:"",how:"Assis, tire la barre vers le haut de la poitrine en serrant le dos, redescends contrôlé."},
+ {n:"Superman / extensions lombaires",g:"dos",e:["bodyweight"],t:"isol",img:"",how:"À plat ventre, lève simultanément bras et jambes en contractant le bas du dos, tiens 1-2 s, redescends."},
+ {n:"Squat gobelet",g:"jambes",e:["dumbbell","kettlebell"],t:"compound",img:"Goblet_Squat",how:"Un haltère tenu verticalement contre la poitrine. Descends en squat (cuisses parallèles), dos droit, talons au sol, remonte."},
+ {n:"Soulevé de terre roumain haltères",g:"jambes",e:["dumbbell"],t:"compound",img:"Stiff-Legged_Dumbbell_Deadlift",how:"Jambes semi-tendues, haltères devant les cuisses. Pousse les hanches en arrière en descendant le long des jambes, remonte. Cible ischios/fessiers."},
+ {n:"Fentes marchées",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Grand pas en avant, descends le genou arrière vers le sol, puis avance avec l'autre jambe. Buste droit."},
+ {n:"Fentes bulgares",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Pied arrière surélevé sur un support, descends en fente sur la jambe avant, remonte. Excellent pour cuisses et fessiers."},
+ {n:"Hip thrust",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Haut du dos appuyé sur un support, un poids sur les hanches. Monte le bassin en serrant les fessiers, redescends."},
+ {n:"Leg extension (extension de jambes assis)",g:"jambes",e:["legext"],t:"isol",img:"Leg_Extensions",how:"Assis sur la machine, chevilles sous le rouleau. Tends les jambes en contractant les quadriceps, redescends lentement."},
+ {n:"Leg extension unilatéral",g:"jambes",e:["legext"],t:"isol",img:"Leg_Extensions",how:"Comme le leg extension, mais une jambe à la fois : utile pour corriger les déséquilibres."},
+ {n:"Squat barre",g:"jambes",e:["barbell"],t:"compound",img:"",how:"Barre sur le haut du dos, descends en squat dos droit, talons ancrés, remonte en poussant."},
+ {n:"Mollets debout (haltères)",g:"jambes",e:["dumbbell","bodyweight"],t:"isol",img:"Standing_Calf_Raises",how:"Debout, haltères en main. Monte sur la pointe des pieds le plus haut possible, redescends lentement."},
+ {n:"Wall sit / chaise",g:"jambes",e:["bodyweight"],t:"isol",img:"",how:"Dos contre le mur, cuisses parallèles au sol (assis sans chaise), tiens la position."},
+ {n:"Développé épaules haltères",g:"epaules",e:["dumbbell"],t:"compound",img:"Dumbbell_Shoulder_Press",how:"Assis ou debout, haltères au niveau des épaules. Pousse au-dessus de la tête jusqu'à tendre les bras, redescends."},
+ {n:"Développé Arnold",g:"epaules",e:["dumbbell"],t:"compound",img:"",how:"Paumes vers toi au départ, tourne les poignets en poussant vers le haut. Sollicite toute l'épaule."},
+ {n:"Élévations latérales",g:"epaules",e:["dumbbell"],t:"isol",img:"Side_Lateral_Raise",how:"Bras le long du corps, coudes légèrement fléchis. Monte les haltères sur les côtés jusqu'à l'horizontale, redescends."},
+ {n:"Oiseau (deltoïde postérieur)",g:"epaules",e:["dumbbell"],t:"isol",img:"",how:"Buste penché en avant, ouvre les bras sur les côtés en serrant les omoplates. Cible l'arrière de l'épaule."},
+ {n:"Élévations frontales haltères",g:"epaules",e:["dumbbell"],t:"isol",img:"Front_Dumbbell_Raise",how:"Bras tendus devant, monte un haltère jusqu'à hauteur des yeux, redescends contrôlé. Alterne."},
+ {n:"Développé militaire barre",g:"epaules",e:["barbell"],t:"compound",img:"",how:"Barre au niveau des épaules, pousse au-dessus de la tête en gardant le gainage, redescends."},
+ {n:"Curl haltères alterné",g:"bras",e:["dumbbell"],t:"isol",img:"Dumbbell_Alternate_Bicep_Curl",how:"Bras le long du corps, coudes fixes. Fléchis un bras en montant l'haltère vers l'épaule, alterne."},
+ {n:"Curl marteau",g:"bras",e:["dumbbell"],t:"isol",img:"Hammer_Curls",how:"Paumes face à face (prise neutre), monte les haltères. Cible biceps et avant-bras."},
+ {n:"Extension nuque haltère",g:"bras",e:["dumbbell"],t:"isol",img:"",how:"Un haltère tenu à deux mains derrière la tête. Tends les bras vers le haut, redescends lentement. Triceps."},
+ {n:"Kickback triceps haltère",g:"bras",e:["dumbbell"],t:"isol",img:"",how:"Buste penché, coude haut et fixe. Tends l'avant-bras vers l'arrière en contractant le triceps."},
+ {n:"Pompes serrées sur poignées",g:"bras",e:["handles"],t:"compound",img:"",how:"Mains rapprochées sur les poignées, coudes près du corps. Descends et remonte. Cible les triceps."},
+ {n:"Pompes diamant (serrées)",g:"bras",e:["bodyweight"],t:"compound",img:"",how:"Mains jointes formant un losange sous la poitrine. Descends et remonte. Triceps et pectoraux internes."},
+ {n:"Curl barre",g:"bras",e:["barbell"],t:"isol",img:"",how:"Debout, barre en prise basse, monte vers les épaules sans balancer le buste."},
+ {n:"Extension triceps poulie",g:"bras",e:["cable"],t:"isol",img:"",how:"À la poulie haute, pousse la barre vers le bas en tendant les bras, coudes fixes."},
+ {n:"Gainage planche",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Sur les avant-bras et pointes de pieds, corps parfaitement droit et gainé. Tiens sans creuser ni cambrer le dos."},
+ {n:"Gainage latéral",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Sur un avant-bras, corps de profil bien aligné, hanches hautes. Tiens, puis change de côté."},
+ {n:"Relevés de jambes au sol",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé sur le dos, jambes tendues. Monte-les jusqu'à la verticale puis redescends sans toucher le sol."},
+ {n:"Russian twists",g:"core",e:["dumbbell","bodyweight"],t:"isol",img:"",how:"Assis, buste penché en arrière, pieds décollés. Fais tourner le buste d'un côté à l'autre (avec ou sans poids)."},
+ {n:"Crunch au sol",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, genoux fléchis. Décolle les épaules en contractant les abdos, redescends sans poser complètement la tête."},
+ {n:"Mountain climbers",g:"core",e:["bodyweight"],t:"cardio",img:"",how:"En position de pompe, ramène alternativement les genoux vers la poitrine rapidement. Gainage + cardio."},
+ {n:"Vélo — endurance (zone 2, 20–30 min)",g:"cardio",e:["bike"],t:"cardio",img:"",how:"Pédale à intensité modérée et constante (tu peux encore parler) 20-30 min. Idéal pour brûler du gras."},
+ {n:"Vélo — intervalles (sprints 30s/30s)",g:"cardio",e:["bike"],t:"cardio",img:"",how:"Alterne 30 s de sprint intense et 30 s de récup facile, pendant 10-15 min. Très efficace pour la perte de gras."},
+ {n:"Burpees",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Squat mains au sol, saute les pieds en arrière (planche), une pompe, ramène les pieds, saute en l'air."},
+ {n:"Kettlebell / haltère swings",g:"cardio",e:["kettlebell","dumbbell"],t:"cardio",img:"",how:"Poids entre les jambes, propulse-le devant toi jusqu'à hauteur d'épaule via une poussée explosive des hanches."},
+ {n:"Thrusters haltères",g:"cardio",e:["dumbbell"],t:"cardio",img:"",how:"Squat haltères aux épaules, puis en remontant pousse les haltères au-dessus de la tête. Enchaîne."},
+ {n:"Squats sautés",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Descends en squat puis saut explosif vers le haut, réception souple, et enchaîne."},
+ {n:"Montées de genoux / corde à sauter",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Sur place, monte les genoux rapidement (ou saute à la corde) pour faire grimper le cardio."},
+ {n:"Fentes sautées",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"En fente, saute pour changer de jambe en l'air, réception contrôlée. Cardio + jambes."}
 ];
+const EXMAP=Object.fromEntries(EX.map(x=>[x.n,x]));
+function detailHTML(name){
+  const info=EXMAP[name];if(!info)return"";
+  const yt="https://www.youtube.com/results?search_query="+encodeURIComponent(name+" technique musculation");
+  const img=info.img?`<img class="exoimg" loading="lazy" src="https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${info.img}/0.jpg" alt="${name}" onerror="this.remove()">`:"";
+  return `<button class="info" onclick="toggleInfo(this)">ⓘ Comment faire</button>`+
+    `<div class="exodetail" style="display:none">${img}<div class="how">${info.how||""}</div>`+
+    `<a class="vidlink" href="${yt}" target="_blank" rel="noopener">▶ Voir une démo vidéo</a></div>`;
+}
+function toggleInfo(btn){const d=btn.nextElementSibling;if(!d)return;const open=d.style.display!=="none";
+  d.style.display=open?"none":"block";btn.textContent=open?"ⓘ Comment faire":"▲ Masquer";}
 
 const PLAN={
  1:{am:"pecs",pm:"dos"}, 2:{am:"jambes",pm:"epaules"}, 3:{am:"bras",pm:"core"},
@@ -511,8 +526,9 @@ function renderSessions(){
   function block(slot,o,key){
     const exos=o.exos.map((e,i)=>{
       if(e.warm) return `<div class="exo" style="opacity:.7"><b>${e.txt}</b><div class="meta">${e.meta}</div></div>`;
-      return `<div class="exo ${e.done?'done':''}" onclick="toggleEx('${key}','${slot}',${i})" style="cursor:pointer">
-        <b>${e.done?'✓ ':''}${e.txt}</b><div class="meta">${e.meta}</div><div class="note">${e.note||''}</div></div>`;
+      return `<div class="exo ${e.done?'done':''}">
+        <div class="exohead" onclick="toggleEx('${key}','${slot}',${i})"><b>${e.done?'✓ ':''}${e.txt}</b><div class="meta">${e.meta}</div><div class="note">${e.note||''}</div></div>
+        ${detailHTML(e.txt)}</div>`;
     }).join("");
     return `<div class="card" style="background:var(--card2)">
       <div class="sesshead"><div class="t"><span class="pill ${slot}">${slot==="am"?"MATIN · 1h":"APRÈS-MIDI · 1h"}</span> ${GLABEL[o.focus]}</div></div>
