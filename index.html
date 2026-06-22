@@ -85,7 +85,7 @@
   .done b{text-decoration:line-through}
   footer{text-align:center;color:var(--mut);font-size:12px;padding:24px 16px 40px}
   .splitbtns{display:flex;gap:8px;flex-wrap:wrap}
-  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;padding:12px 20px;border-radius:14px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:50;box-shadow:0 8px 24px rgba(168,85,247,.5)}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;padding:12px 20px;border-radius:14px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:50;box-shadow:0 8px 24px rgba(168,85,247,.5);max-width:90vw}
   .toast.show{opacity:1}
   .motiv{background:var(--grad);border:none;color:#fff;position:relative;overflow:hidden;animation:glow 4s ease-in-out infinite}
   .motiv::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:rgba(255,255,255,.12);border-radius:50%;animation:float 6s ease-in-out infinite}
@@ -319,7 +319,7 @@
     </div>
     <div class="card">
       <h2>Mémoire & sauvegarde</h2>
-      <div class="muted">Tes données restent sur cet appareil. Exporte un fichier de temps en temps pour garder une sauvegarde (utile si tu changes de téléphone).</div>
+      <div class="muted">Tes données restent sur cet appareil. Exporte un fichier de temps en temps pour garder une sauvegarde.</div>
       <div class="splitbtns" style="margin-top:12px">
         <button class="btn sec" id="exportBtn">⬇ Exporter (.json)</button>
         <button class="btn sec" id="importBtn">⬆ Importer</button>
@@ -365,7 +365,7 @@ const DEFAULT={
 let DB=load();
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):structuredClone(DEFAULT);}catch(e){return structuredClone(DEFAULT);}}
 function save(){localStorage.setItem(KEY,JSON.stringify(DB));}
-function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1700);}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600);}
 
 let viewDate=new Date();
 function iso(d){return d.toISOString().slice(0,10);}
@@ -1038,7 +1038,7 @@ document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>{
 document.getElementById("estBtn").onclick=()=>{
   const txt=fDesc.value.trim();if(!txt){toast("Décris ton plat d'abord");return;}
   const r=estimateMeal(txt);
-  if(!r.got.length){toast("Aliment non reconnu — saisis à la main");return;}
+  if(!r.got.length){toast(r.missed&&r.missed.length?"⚠ Aucun aliment reconnu : "+r.missed.join(", "):"Aliment non reconnu — saisis à la main");return;}
   if(!fName.value.trim())fName.value=txt.slice(0,40);
   fKcal.value=r.kcal;fProt.value=r.p;fGluc.value=r.c;fLip.value=r.f;
   let msg="≈ "+r.kcal+" kcal";if(r.got.length)msg+=" · "+[...new Set(r.got)].join(", ");if(r.missed&&r.missed.length)msg+=" · ⚠ non reconnu : "+r.missed.join(", ");
