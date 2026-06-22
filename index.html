@@ -23,15 +23,12 @@
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
     color:var(--txt);-webkit-font-smoothing:antialiased;
     background:radial-gradient(1200px 600px at 15% -5%,#2c1a55 0%,rgba(44,26,85,0) 55%),
-               radial-gradient(1000px 500px at 100% 0%,#3a1a4e 0%,rgba(58,26,78,0) 50%),
-               var(--bg);
+               radial-gradient(1000px 500px at 100% 0%,#3a1a4e 0%,rgba(58,26,78,0) 50%),var(--bg);
     background-attachment:fixed;min-height:100vh}
   header{padding:18px 20px 10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-  header h1{margin:0;font-size:23px;letter-spacing:.5px;font-weight:800;
-    background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  header h1{margin:0;font-size:23px;letter-spacing:.5px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .date{color:var(--mut);font-size:13px}
-  nav{display:flex;gap:6px;overflow-x:auto;padding:6px 14px;position:sticky;top:0;z-index:5;
-    background:rgba(13,10,24,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav{display:flex;gap:6px;overflow-x:auto;padding:6px 14px;position:sticky;top:0;z-index:5;background:rgba(13,10,24,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   nav button{background:none;border:none;color:var(--mut);padding:10px 14px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.2s}
   nav button.active{background:var(--grad);color:#fff;box-shadow:0 4px 14px rgba(168,85,247,.4)}
   nav button:hover:not(.active){color:var(--txt);background:var(--card2)}
@@ -39,44 +36,36 @@
   .view{display:none;animation:f .25s ease}
   .view.active{display:block}
   @keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:16px;margin-bottom:14px;
-    box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:16px;margin-bottom:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
   .card h2{margin:0 0 12px;font-size:14px;color:var(--mut);text-transform:uppercase;letter-spacing:.7px;font-weight:700}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .stat{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;
-    transition:transform .18s ease,box-shadow .18s ease}
+  .stat{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;transition:transform .18s ease,box-shadow .18s ease}
   .stat:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(168,85,247,.28)}
   .stat .num{font-size:26px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .stat .lab{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
   .bar{height:11px;background:var(--card2);border-radius:999px;overflow:hidden;margin:8px 0;border:1px solid var(--line)}
   .bar > i{display:block;height:100%;border-radius:999px;transition:width .5s ease;position:relative;overflow:hidden}
-  .bar > i::after{content:"";position:absolute;inset:0;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
-    transform:translateX(-100%);animation:shimmer 2.4s ease-in-out infinite}
-  input,select{background:var(--card2);border:1px solid var(--line);color:var(--txt);
-    border-radius:12px;padding:11px 12px;font-size:15px;width:100%;outline:none}
-  input:focus,select:focus{border-color:var(--acc2);box-shadow:0 0 0 3px rgba(232,121,249,.15)}
+  .bar > i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transform:translateX(-100%);animation:shimmer 2.4s ease-in-out infinite}
+  input,select,textarea{background:var(--card2);border:1px solid var(--line);color:var(--txt);border-radius:12px;padding:11px 12px;font-size:15px;width:100%;outline:none;font-family:inherit}
+  textarea{resize:vertical}
+  input:focus,select:focus,textarea:focus{border-color:var(--acc2);box-shadow:0 0 0 3px rgba(232,121,249,.15)}
   label{display:block;font-size:12px;color:var(--mut);margin:0 0 5px;font-weight:600}
   .row{display:flex;gap:10px;flex-wrap:wrap}
   .row > div{flex:1;min-width:120px}
-  button.btn{background:var(--grad);color:#fff;border:none;border-radius:12px;padding:12px 16px;
-    font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(168,85,247,.35);transition:.15s}
+  button.btn{background:var(--grad);color:#fff;border:none;border-radius:12px;padding:12px 16px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(168,85,247,.35);transition:.15s}
   button.btn.sec{background:var(--card2);color:var(--txt);border:1px solid var(--line);box-shadow:none}
   button.btn.blue{background:var(--grad2)}
   button.btn:hover{filter:brightness(1.09);transform:translateY(-1px)}
   button.btn:active{transform:scale(.97)}
   .list{margin:10px 0 0}
-  .item{display:flex;align-items:center;justify-content:space-between;background:var(--card2);border:1px solid var(--line);
-    border-radius:12px;padding:10px 12px;margin-bottom:7px;font-size:14px;gap:8px}
+  .item{display:flex;align-items:center;justify-content:space-between;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:7px;font-size:14px;gap:8px}
   .item .x{color:var(--bad);cursor:pointer;font-weight:700;padding:0 4px}
   .muted{color:var(--mut);font-size:13px}
-  .tag{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:10px;
-    padding:8px 12px;font-size:13px;cursor:pointer;user-select:none;transition:transform .12s ease,box-shadow .15s ease,background .15s ease}
+  .tag{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;cursor:pointer;user-select:none;transition:transform .12s ease,box-shadow .15s ease,background .15s ease}
   .tag:active{transform:scale(.94)}
   .tag.on{background:var(--grad);color:#fff;border-color:transparent;font-weight:700;box-shadow:0 3px 10px rgba(168,85,247,.35)}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-  .exo{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:8px;
-    transition:transform .15s ease,border-color .15s ease}
+  .exo{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:8px;transition:transform .15s ease,border-color .15s ease}
   .exo:hover{transform:translateX(4px);border-color:var(--acc3)}
   .exo b{font-size:15px}
   .exo .meta{color:var(--acc2);font-size:13px;font-weight:600;margin-top:2px}
@@ -96,24 +85,18 @@
   .done b{text-decoration:line-through}
   footer{text-align:center;color:var(--mut);font-size:12px;padding:24px 16px 40px}
   .splitbtns{display:flex;gap:8px;flex-wrap:wrap}
-  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--grad);
-    color:#fff;padding:12px 20px;border-radius:14px;font-weight:700;font-size:14px;
-    opacity:0;pointer-events:none;transition:opacity .3s;z-index:50;box-shadow:0 8px 24px rgba(168,85,247,.5)}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;padding:12px 20px;border-radius:14px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:50;box-shadow:0 8px 24px rgba(168,85,247,.5)}
   .toast.show{opacity:1}
   .motiv{background:var(--grad);border:none;color:#fff;position:relative;overflow:hidden;animation:glow 4s ease-in-out infinite}
-  .motiv::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;
-    background:rgba(255,255,255,.12);border-radius:50%;animation:float 6s ease-in-out infinite}
-  .motiv::before{content:"";position:absolute;left:-25px;bottom:-35px;width:100px;height:100px;
-    background:rgba(255,255,255,.08);border-radius:50%;animation:float 7.5s ease-in-out infinite reverse}
+  .motiv::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:rgba(255,255,255,.12);border-radius:50%;animation:float 6s ease-in-out infinite}
+  .motiv::before{content:"";position:absolute;left:-25px;bottom:-35px;width:100px;height:100px;background:rgba(255,255,255,.08);border-radius:50%;animation:float 7.5s ease-in-out infinite reverse}
   .motiv .k{font-size:11px;letter-spacing:1.2px;font-weight:700;opacity:.9;text-transform:uppercase;position:relative;z-index:1}
   .motiv .q{font-size:18px;font-weight:800;line-height:1.35;margin-top:6px;position:relative;z-index:1}
   .focus-today{display:flex;gap:10px;margin-top:12px;position:relative;z-index:1}
   .focus-today .fc{flex:1;background:rgba(255,255,255,.14);border-radius:14px;padding:12px;text-align:center}
   .focus-today .fc .s{font-size:11px;opacity:.9;font-weight:700;letter-spacing:.5px}
   .focus-today .fc .g{font-size:14px;font-weight:800;margin-top:3px}
-  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:linear-gradient(120deg,#2c1a55,#3a1a4e,#1a1340,#2c1a55);
-    background-size:300% 300%;animation:bgshift 20s ease infinite;opacity:.5}
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(120deg,#2c1a55,#3a1a4e,#1a1340,#2c1a55);background-size:300% 300%;animation:bgshift 20s ease infinite;opacity:.5}
   @keyframes bgshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
   .view.active .card:not(.motiv){animation:cardin .5s ease both}
   .view.active .card:nth-child(2){animation-delay:.05s}
@@ -126,34 +109,28 @@
   @keyframes glow{0%,100%{box-shadow:0 8px 24px rgba(168,85,247,.3)}50%{box-shadow:0 10px 40px rgba(232,121,249,.55)}}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
   @keyframes checkpop{0%{transform:scale(1)}40%{transform:scale(.96)}100%{transform:scale(1)}}
-  .confetti{position:fixed;top:-14px;width:9px;height:15px;border-radius:2px;z-index:60;
-    pointer-events:none;animation:confettiFall 2.3s linear forwards}
+  .confetti{position:fixed;top:-14px;width:9px;height:15px;border-radius:2px;z-index:60;pointer-events:none;animation:confettiFall 2.3s linear forwards}
   @keyframes confettiFall{0%{opacity:1}to{transform:translateY(108vh) rotate(620deg);opacity:.15}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   .exohead{cursor:pointer}
-  .info{margin-top:9px;margin-right:6px;background:rgba(168,85,247,.16);color:var(--acc2);border:1px solid var(--line);
-    border-radius:10px;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer}
+  .info{margin-top:9px;margin-right:6px;background:rgba(168,85,247,.16);color:var(--acc2);border:1px solid var(--line);border-radius:10px;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer}
   .exodetail{margin-top:10px;border-top:1px solid var(--line);padding-top:11px;animation:cardin .3s ease}
   .exoimg{width:100%;max-width:300px;border-radius:12px;display:block;margin:0 auto 10px;background:#fff}
   .how{font-size:13px;color:var(--txt);line-height:1.55}
-  .vidlink{display:inline-block;margin-top:11px;color:#fff;background:var(--grad2);padding:8px 13px;
-    border-radius:10px;font-size:13px;font-weight:700;text-decoration:none}
+  .vidlink{display:inline-block;margin-top:11px;color:#fff;background:var(--grad2);padding:8px 13px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none}
   .tbtn{display:inline-block;margin-top:10px;background:rgba(124,58,237,.22);color:#fff;border-color:var(--acc3)}
   .wrec{margin-top:11px;background:rgba(168,85,247,.1);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:13px}
   .wsave{margin-top:7px}
   .wsave input{width:90px;display:inline-block;padding:7px 9px}
   .stretchbtn{background:rgba(74,222,128,.14);color:#86efac;border-color:rgba(74,222,128,.35);margin-top:0}
-  .stretchrow{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .stretchrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
   .stretchrow:last-child{border-bottom:none}
-  .stretchrow .meta{color:var(--ok);font-weight:600;white-space:nowrap}
-  /* minuteur */
-  .tov{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;
-    background:rgba(8,5,18,.92);backdrop-filter:blur(6px)}
-  .tbox{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 22px;max-width:360px;width:100%;
-    text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.6)}
+  .stretchrow .meta{color:var(--ok);font-weight:600;font-size:12px}
+  .sdemo{color:#fff;background:var(--grad2);font-size:11px;font-weight:700;text-decoration:none;padding:5px 9px;border-radius:8px;white-space:nowrap}
+  .tov{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(8,5,18,.92);backdrop-filter:blur(6px)}
+  .tbox{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 22px;max-width:360px;width:100%;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.6)}
   .tphase{font-size:14px;font-weight:800;letter-spacing:2.5px}
-  .tnum{font-size:84px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums;
-    background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tnum{font-size:84px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .tround{color:var(--mut);font-weight:700;font-size:14px}
   .tname{color:var(--txt);font-size:14px;margin-top:6px;font-weight:600;min-height:18px}
   .tctrls{display:flex;gap:8px;justify-content:center;margin-top:18px}
@@ -227,7 +204,7 @@
         <button class="btn sec" id="prevDay">◀ Hier</button>
         <button class="btn sec" id="nextDay">Demain ▶</button>
       </div>
-      <div class="hint">Touche « ⓘ Détails & minuteur » sous un exercice pour la fiche, le poids conseillé et le minuteur Tabata. Étirements optionnels en bas de chaque séance.</div>
+      <div class="hint">Touche « ⓘ Détails & minuteur » sous un exercice pour la fiche, le poids conseillé et le minuteur Tabata. Étirements (avec démo vidéo) en bas de chaque séance.</div>
     </div>
     <div class="card">
       <h2>Historique séances</h2>
@@ -238,6 +215,9 @@
   <section id="calories" class="view">
     <div class="card">
       <h2>Ajouter un aliment</h2>
+      <label>Estimer depuis un plat (estimation automatique)</label>
+      <textarea id="fDesc" rows="2" placeholder="ex : 150g poulet, 200g riz, 1 cuillère d'huile, 1 yaourt"></textarea>
+      <button class="btn sec" id="estBtn" style="margin:8px 0 14px">✨ Estimer calories & macros</button>
       <div class="row">
         <div style="flex:2"><label>Aliment</label><input id="fName" placeholder="ex : Poulet riz"></div>
         <div><label>kcal</label><input id="fKcal" type="number" inputmode="numeric" placeholder="450"></div>
@@ -269,9 +249,16 @@
       <div class="bar" style="margin:14px 0"><i id="hBar" style="background:var(--grad2)"></i></div>
       <div class="waterglass" id="hGlasses"></div>
       <div class="splitbtns center" style="justify-content:center;margin-top:14px">
-        <button class="btn blue" data-ml="250">+ Verre 250ml</button>
-        <button class="btn blue" data-ml="500">+ Bouteille 500ml</button>
-        <button class="btn sec" data-ml="-250">− 250ml</button>
+        <button class="btn blue" data-ml="100">+100</button>
+        <button class="btn blue" data-ml="200">+200</button>
+        <button class="btn blue" data-ml="250">+250</button>
+        <button class="btn blue" data-ml="500">+500</button>
+      </div>
+      <div class="splitbtns center" style="justify-content:center;margin-top:8px">
+        <button class="btn sec" data-ml="-100">−100</button>
+        <button class="btn sec" data-ml="-250">−250</button>
+        <input id="hCustom" type="number" inputmode="numeric" placeholder="ml" style="max-width:90px">
+        <button class="btn sec" id="hAddCustom">+ Ajouter</button>
       </div>
     </div>
   </section>
@@ -285,8 +272,8 @@
       </div>
     </div>
     <div class="card">
-      <h2>Évolution</h2>
-      <canvas id="wChart" width="700" height="260"></canvas>
+      <h2>Évolution dans le temps</h2>
+      <canvas id="wChart" width="700" height="270"></canvas>
       <div class="grid" style="margin-top:12px">
         <div class="stat"><div class="num" id="wStart">—</div><div class="lab">départ</div></div>
         <div class="stat"><div class="num" id="wNow">—</div><div class="lab">actuel</div></div>
@@ -327,7 +314,7 @@
     </div>
     <div class="card">
       <h2>Mémoire & sauvegarde</h2>
-      <div class="muted">Tes données sont enregistrées automatiquement sur cet appareil. Exporte un fichier pour faire une sauvegarde ou changer de PC.</div>
+      <div class="muted">Tes données restent sur cet appareil. Exporte un fichier de temps en temps pour garder une sauvegarde (utile si tu changes de téléphone).</div>
       <div class="splitbtns" style="margin-top:12px">
         <button class="btn sec" id="exportBtn">⬇ Exporter (.json)</button>
         <button class="btn sec" id="importBtn">⬆ Importer</button>
@@ -338,7 +325,7 @@
   </section>
 
 </main>
-<footer>FitTrack · <b style="color:var(--acc2)">v7</b> · 100% local · tes données ne quittent pas ton appareil</footer>
+<footer>FitTrack · <b style="color:var(--acc2)">v8</b> · 100% local · tes données ne quittent pas ton appareil</footer>
 
 <div id="timerOverlay" class="tov">
   <div class="tbox">
@@ -373,7 +360,7 @@ const DEFAULT={
 let DB=load();
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):structuredClone(DEFAULT);}catch(e){return structuredClone(DEFAULT);}}
 function save(){localStorage.setItem(KEY,JSON.stringify(DB));}
-function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1600);}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1700);}
 
 let viewDate=new Date();
 function iso(d){return d.toISOString().slice(0,10);}
@@ -381,9 +368,7 @@ function todayIso(){return iso(new Date());}
 function frDate(d){return d.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});}
 function dayData(k){if(!DB.days[k])DB.days[k]={foods:[],water:0,weight:null};return DB.days[k];}
 
-function bmr(){const p=DB.profile;return p.sexe==="h"
-  ? 10*p.poidsActuel+6.25*p.taille-5*p.age+5
-  : 10*p.poidsActuel+6.25*p.taille-5*p.age-161;}
+function bmr(){const p=DB.profile;return p.sexe==="h"?10*p.poidsActuel+6.25*p.taille-5*p.age+5:10*p.poidsActuel+6.25*p.taille-5*p.age-161;}
 function tdee(){return bmr()*DB.profile.activite;}
 function calTarget(){return Math.round(tdee()*0.85);}
 function protTarget(){return Math.round(DB.profile.poidsActuel*2.0);}
@@ -405,60 +390,63 @@ const QUOTES=[
 const EX=[
  {n:"Développé couché haltères",g:"pecs",e:["dumbbell"],t:"compound",img:"Dumbbell_Bench_Press",how:"Allongé sur le dos (banc ou sol), haltères au niveau de la poitrine, coudes ~45°. Pousse vers le haut jusqu'à tendre les bras, puis redescends lentement."},
  {n:"Développé incliné haltères",g:"pecs",e:["dumbbell"],t:"compound",img:"Incline_Dumbbell_Press",how:"Sur un plan incliné (~30°), haltères aux épaules, pousse vers le haut et l'avant. Cible le haut des pectoraux."},
- {n:"Écarté haltères",g:"pecs",e:["dumbbell"],t:"isol",img:"",how:"Allongé, bras légèrement fléchis, ouvre les bras en arc de cercle puis ramène les haltères au-dessus de la poitrine. Contrôle la descente."},
- {n:"Pompes sur poignées (amplitude max)",g:"pecs",e:["handles"],t:"compound",img:"",how:"Mains sur les poignées, corps gainé et droit. Descends la poitrine plus bas que les mains pour un max d'amplitude, puis remonte."},
- {n:"Pompes lestées / déclinées",g:"pecs",e:["bodyweight"],t:"compound",img:"",how:"Pieds surélevés (ou un lest sur le dos). Descends en gardant le corps bien droit, remonte en poussant fort."},
+ {n:"Écarté haltères",g:"pecs",e:["dumbbell"],t:"isol",img:"",how:"Allongé, bras légèrement fléchis, ouvre les bras en arc de cercle puis ramène les haltères au-dessus de la poitrine."},
+ {n:"Pompes sur poignées (amplitude max)",g:"pecs",e:["handles"],t:"compound",img:"",how:"Mains sur les poignées, corps gainé. Descends la poitrine plus bas que les mains, puis remonte."},
+ {n:"Pompes lestées / déclinées",g:"pecs",e:["bodyweight"],t:"compound",img:"",how:"Pieds surélevés (ou un lest sur le dos). Descends bien droit, remonte en poussant fort."},
  {n:"Écarté poulie",g:"pecs",e:["cable"],t:"isol",img:"",how:"Aux poulies, ramène les poignées devant toi en arc de cercle, en contractant les pectoraux."},
- {n:"Rowing haltère unilatéral",g:"dos",e:["dumbbell"],t:"compound",img:"",how:"Un genou et une main en appui sur un banc, dos plat. Tire l'haltère vers la hanche en serrant l'omoplate, redescends contrôlé."},
- {n:"Rowing haltères (deux bras)",g:"dos",e:["dumbbell"],t:"compound",img:"Bent_Over_Two-Dumbbell_Row",how:"Buste penché ~45°, dos plat, bras tendus. Tire les deux haltères vers le bas des côtes en serrant les omoplates."},
- {n:"Soulevé de terre haltères",g:"dos",e:["dumbbell"],t:"compound",img:"Stiff-Legged_Dumbbell_Deadlift",how:"Haltères devant les cuisses, dos droit. Descends en poussant les hanches en arrière, remonte en contractant fessiers et dos."},
- {n:"Tractions pronation",g:"dos",e:["pullup"],t:"compound",img:"",how:"Suspendu à la barre, paumes vers l'avant. Tire-toi jusqu'à passer le menton au-dessus de la barre, redescends contrôlé."},
- {n:"Tractions supination",g:"dos",e:["pullup"],t:"compound",img:"",how:"Comme les tractions mais paumes vers toi : sollicite davantage les biceps."},
+ {n:"Rowing haltère unilatéral",g:"dos",e:["dumbbell"],t:"compound",img:"",how:"Un genou et une main sur un banc, dos plat. Tire l'haltère vers la hanche en serrant l'omoplate."},
+ {n:"Rowing haltères (deux bras)",g:"dos",e:["dumbbell"],t:"compound",img:"Bent_Over_Two-Dumbbell_Row",how:"Buste penché ~45°, dos plat. Tire les deux haltères vers le bas des côtes en serrant les omoplates."},
+ {n:"Soulevé de terre haltères",g:"dos",e:["dumbbell"],t:"compound",img:"Stiff-Legged_Dumbbell_Deadlift",how:"Haltères devant les cuisses, dos droit. Descends en poussant les hanches en arrière, remonte en contractant le dos."},
+ {n:"Pull-over haltère",g:"dos",e:["dumbbell"],t:"isol",img:"",how:"Allongé, un haltère à deux mains au-dessus de la poitrine. Descends-le derrière la tête, puis ramène."},
+ {n:"Tractions pronation",g:"dos",e:["pullup"],t:"compound",img:"",how:"Suspendu, paumes vers l'avant. Tire-toi jusqu'à passer le menton au-dessus de la barre."},
+ {n:"Tractions supination",g:"dos",e:["pullup"],t:"compound",img:"",how:"Comme les tractions mais paumes vers toi : plus de biceps."},
  {n:"Rowing barre buste penché",g:"dos",e:["barbell"],t:"compound",img:"",how:"Buste penché, dos plat, tire la barre vers le nombril en serrant les omoplates."},
- {n:"Tirage poulie haute",g:"dos",e:["cable"],t:"compound",img:"",how:"Assis, tire la barre vers le haut de la poitrine en serrant le dos, redescends contrôlé."},
- {n:"Superman / extensions lombaires",g:"dos",e:["bodyweight"],t:"isol",img:"",how:"À plat ventre, lève simultanément bras et jambes en contractant le bas du dos, tiens 1-2 s, redescends."},
- {n:"Squat gobelet",g:"jambes",e:["dumbbell","kettlebell"],t:"compound",img:"Goblet_Squat",how:"Un haltère tenu verticalement contre la poitrine. Descends en squat (cuisses parallèles), dos droit, talons au sol, remonte."},
- {n:"Soulevé de terre roumain haltères",g:"jambes",e:["dumbbell"],t:"compound",img:"Stiff-Legged_Dumbbell_Deadlift",how:"Jambes semi-tendues, haltères devant les cuisses. Pousse les hanches en arrière en descendant le long des jambes, remonte. Cible ischios/fessiers."},
- {n:"Fentes marchées",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Grand pas en avant, descends le genou arrière vers le sol, puis avance avec l'autre jambe. Buste droit."},
- {n:"Hip thrust",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Haut du dos appuyé sur un support, un poids sur les hanches. Monte le bassin en serrant les fessiers, redescends."},
- {n:"Leg extension (extension de jambes assis)",g:"jambes",e:["legext"],t:"isol",img:"Leg_Extensions",how:"Assis sur la machine, chevilles sous le rouleau. Tends les jambes en contractant les quadriceps, redescends lentement."},
- {n:"Leg extension unilatéral",g:"jambes",e:["legext"],t:"isol",img:"Leg_Extensions",how:"Comme le leg extension, mais une jambe à la fois : utile pour corriger les déséquilibres."},
- {n:"Squat barre",g:"jambes",e:["barbell"],t:"compound",img:"",how:"Barre sur le haut du dos, descends en squat dos droit, talons ancrés, remonte en poussant."},
+ {n:"Tirage poulie haute",g:"dos",e:["cable"],t:"compound",img:"",how:"Assis, tire la barre vers le haut de la poitrine en serrant le dos."},
+ {n:"Superman / extensions lombaires",g:"dos",e:["bodyweight"],t:"isol",img:"",how:"À plat ventre, lève bras et jambes en contractant le bas du dos, tiens 1-2 s."},
+ {n:"Squat gobelet",g:"jambes",e:["dumbbell","kettlebell"],t:"compound",img:"Goblet_Squat",how:"Un haltère vertical contre la poitrine. Descends en squat (cuisses parallèles), dos droit, remonte."},
+ {n:"Soulevé de terre roumain haltères",g:"jambes",e:["dumbbell"],t:"compound",img:"Stiff-Legged_Dumbbell_Deadlift",how:"Jambes semi-tendues. Pousse les hanches en arrière en descendant le long des jambes, remonte. Ischios/fessiers."},
+ {n:"Fentes marchées",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Grand pas en avant, descends le genou arrière, puis avance avec l'autre jambe. Buste droit."},
+ {n:"Hip thrust",g:"jambes",e:["dumbbell","bodyweight"],t:"compound",img:"",how:"Haut du dos appuyé, un poids sur les hanches. Monte le bassin en serrant les fessiers."},
+ {n:"Leg extension (extension de jambes assis)",g:"jambes",e:["legext"],t:"isol",img:"Leg_Extensions",how:"Assis, chevilles sous le rouleau. Tends les jambes en contractant les quadriceps, redescends lentement."},
+ {n:"Leg extension unilatéral",g:"jambes",e:["legext"],t:"isol",img:"Leg_Extensions",how:"Comme le leg extension mais une jambe à la fois."},
+ {n:"Squat barre",g:"jambes",e:["barbell"],t:"compound",img:"",how:"Barre sur le haut du dos, descends en squat dos droit, remonte en poussant."},
  {n:"Mollets debout (haltères)",g:"jambes",e:["dumbbell","bodyweight"],t:"isol",img:"Standing_Calf_Raises",how:"Debout, haltères en main. Monte sur la pointe des pieds le plus haut possible, redescends lentement."},
- {n:"Wall sit / chaise",g:"jambes",e:["bodyweight"],t:"isol",img:"",how:"Dos contre le mur, cuisses parallèles au sol (assis sans chaise), tiens la position."},
- {n:"Développé épaules haltères",g:"epaules",e:["dumbbell"],t:"compound",img:"Dumbbell_Shoulder_Press",how:"Assis ou debout, haltères au niveau des épaules. Pousse au-dessus de la tête jusqu'à tendre les bras, redescends."},
- {n:"Élévations latérales",g:"epaules",e:["dumbbell"],t:"isol",img:"Side_Lateral_Raise",how:"Bras le long du corps, coudes légèrement fléchis. Monte les haltères sur les côtés jusqu'à l'horizontale, redescends."},
- {n:"Oiseau (deltoïde postérieur)",g:"epaules",e:["dumbbell"],t:"isol",img:"",how:"Buste penché en avant, ouvre les bras sur les côtés en serrant les omoplates. Cible l'arrière de l'épaule."},
- {n:"Élévations frontales haltères",g:"epaules",e:["dumbbell"],t:"isol",img:"Front_Dumbbell_Raise",how:"Bras tendus devant, monte un haltère jusqu'à hauteur des yeux, redescends contrôlé. Alterne."},
- {n:"Développé militaire barre",g:"epaules",e:["barbell"],t:"compound",img:"",how:"Barre au niveau des épaules, pousse au-dessus de la tête en gardant le gainage, redescends."},
- {n:"Curl haltères alterné",g:"bras",e:["dumbbell"],t:"isol",img:"Dumbbell_Alternate_Bicep_Curl",how:"Bras le long du corps, coudes fixes. Fléchis un bras en montant l'haltère vers l'épaule, alterne."},
- {n:"Curl marteau",g:"bras",e:["dumbbell"],t:"isol",img:"Hammer_Curls",how:"Paumes face à face (prise neutre), monte les haltères. Cible biceps et avant-bras."},
- {n:"Extension nuque haltère",g:"bras",e:["dumbbell"],t:"isol",img:"",how:"Un haltère tenu à deux mains derrière la tête. Tends les bras vers le haut, redescends lentement. Triceps."},
- {n:"Kickback triceps haltère",g:"bras",e:["dumbbell"],t:"isol",img:"",how:"Buste penché, coude haut et fixe. Tends l'avant-bras vers l'arrière en contractant le triceps."},
- {n:"Pompes serrées sur poignées",g:"bras",e:["handles"],t:"compound",img:"",how:"Mains rapprochées sur les poignées, coudes près du corps. Descends et remonte. Cible les triceps."},
- {n:"Pompes diamant (serrées)",g:"bras",e:["bodyweight"],t:"compound",img:"",how:"Mains jointes formant un losange sous la poitrine. Descends et remonte. Triceps et pectoraux internes."},
+ {n:"Wall sit / chaise",g:"jambes",e:["bodyweight"],t:"isol",img:"",how:"Dos contre le mur, cuisses parallèles au sol, tiens la position."},
+ {n:"Développé épaules haltères",g:"epaules",e:["dumbbell"],t:"compound",img:"Dumbbell_Shoulder_Press",how:"Haltères au niveau des épaules. Pousse au-dessus de la tête jusqu'à tendre les bras, redescends."},
+ {n:"Élévations latérales",g:"epaules",e:["dumbbell"],t:"isol",img:"Side_Lateral_Raise",how:"Bras le long du corps, coudes un peu fléchis. Monte les haltères sur les côtés jusqu'à l'horizontale."},
+ {n:"Oiseau (deltoïde postérieur)",g:"epaules",e:["dumbbell"],t:"isol",img:"",how:"Buste penché, ouvre les bras sur les côtés en serrant les omoplates. Arrière de l'épaule."},
+ {n:"Élévations frontales haltères",g:"epaules",e:["dumbbell"],t:"isol",img:"Front_Dumbbell_Raise",how:"Bras tendus devant, monte un haltère jusqu'à hauteur des yeux, alterne."},
+ {n:"Développé militaire barre",g:"epaules",e:["barbell"],t:"compound",img:"",how:"Barre aux épaules, pousse au-dessus de la tête en gardant le gainage."},
+ {n:"Curl haltères alterné",g:"bras",e:["dumbbell"],t:"isol",img:"Dumbbell_Alternate_Bicep_Curl",how:"Coudes fixes. Fléchis un bras en montant l'haltère vers l'épaule, alterne."},
+ {n:"Curl marteau",g:"bras",e:["dumbbell"],t:"isol",img:"Hammer_Curls",how:"Paumes face à face. Monte les haltères. Biceps et avant-bras."},
+ {n:"Extension nuque haltère",g:"bras",e:["dumbbell"],t:"isol",img:"",how:"Un haltère à deux mains derrière la tête. Tends les bras vers le haut, redescends. Triceps."},
+ {n:"Kickback triceps haltère",g:"bras",e:["dumbbell"],t:"isol",img:"",how:"Buste penché, coude haut et fixe. Tends l'avant-bras vers l'arrière."},
+ {n:"Pompes serrées sur poignées",g:"bras",e:["handles"],t:"compound",img:"",how:"Mains rapprochées, coudes près du corps. Descends et remonte. Triceps."},
+ {n:"Pompes diamant (serrées)",g:"bras",e:["bodyweight"],t:"compound",img:"",how:"Mains jointes en losange sous la poitrine. Descends et remonte."},
  {n:"Curl barre",g:"bras",e:["barbell"],t:"isol",img:"",how:"Debout, barre en prise basse, monte vers les épaules sans balancer le buste."},
- {n:"Extension triceps poulie",g:"bras",e:["cable"],t:"isol",img:"",how:"À la poulie haute, pousse la barre vers le bas en tendant les bras, coudes fixes."},
- {n:"Gainage planche",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Sur les avant-bras et pointes de pieds, corps parfaitement droit et gainé. Tiens sans creuser ni cambrer le dos."},
- {n:"Gainage latéral",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Sur un avant-bras, corps de profil bien aligné, hanches hautes. Tiens, puis change de côté."},
- {n:"Relevés de jambes au sol",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé sur le dos, jambes tendues. Monte-les jusqu'à la verticale puis redescends sans toucher le sol."},
- {n:"Russian twists",g:"core",e:["dumbbell","bodyweight"],t:"isol",img:"",how:"Assis, buste penché en arrière, pieds décollés. Fais tourner le buste d'un côté à l'autre (avec ou sans poids)."},
- {n:"Crunch au sol",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, genoux fléchis. Décolle les épaules en contractant les abdos, redescends sans poser complètement la tête."},
- {n:"Reverse crunch (relevé de bassin)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, genoux fléchis vers la poitrine. Décolle le bassin du sol en enroulant le bas du dos, redescends contrôlé. Cible le bas des abdos."},
- {n:"Bicyclette (pédalo abdos)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, pédale dans le vide en amenant le coude vers le genou opposé, en alternance, sans tirer sur la nuque."},
- {n:"Crunch jambes levées",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, jambes levées genoux pliés à 90°. Décolle les épaules en contractant les abdos, redescends doucement."},
- {n:"Mountain climbers",g:"core",e:["bodyweight"],t:"cardio",img:"",how:"En position de pompe, ramène alternativement les genoux vers la poitrine rapidement. Gainage + cardio."},
- {n:"Course à pied — endurance (20–30 min)",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Cours à allure modérée et régulière (tu peux tenir une conversation) pendant 20-30 min. Idéal pour brûler du gras."},
- {n:"Course à pied — fractionné (30s vite / 1 min lent)",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Après 5 min d'échauffement, alterne 30 s de course rapide et 1 min de footing lent, sur 12-15 min. Très efficace pour la perte de gras."},
- {n:"Course à pied — sprints courts",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Après échauffement, enchaîne 8-10 sprints de 20-30 s à fond, avec récupération complète (marche) entre chaque."},
- {n:"Burpees",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Squat mains au sol, saute les pieds en arrière (planche), une pompe, ramène les pieds, saute en l'air."},
- {n:"Squats sautés",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Descends en squat puis saut explosif vers le haut, réception souple, et enchaîne."},
- {n:"Montées de genoux / corde à sauter",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Sur place, monte les genoux rapidement (ou saute à la corde) pour faire grimper le cardio."},
- {n:"Fentes sautées",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"En fente, saute pour changer de jambe en l'air, réception contrôlée. Cardio + jambes."}
+ {n:"Extension triceps poulie",g:"bras",e:["cable"],t:"isol",img:"",how:"Poulie haute, pousse la barre vers le bas en tendant les bras, coudes fixes."},
+ {n:"Gainage planche",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Sur les avant-bras et pointes de pieds, corps droit et gainé. Sans creuser le dos."},
+ {n:"Gainage latéral",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Sur un avant-bras, corps de profil aligné, hanches hautes. Change de côté."},
+ {n:"Relevés de jambes au sol",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Allongé, jambes tendues. Monte-les jusqu'à la verticale puis redescends sans toucher le sol."},
+ {n:"Russian twists",g:"core",e:["dumbbell","bodyweight"],t:"isol",img:"",how:"Assis, buste en arrière, pieds décollés. Tourne le buste d'un côté à l'autre."},
+ {n:"Crunch au sol",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Genoux fléchis. Décolle les épaules en contractant les abdos, redescends sans poser la tête."},
+ {n:"Reverse crunch (relevé de bassin)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Genoux vers la poitrine. Décolle le bassin en enroulant le bas du dos. Bas des abdos."},
+ {n:"Bicyclette (pédalo abdos)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Pédale dans le vide, coude vers le genou opposé, en alternance, sans tirer sur la nuque."},
+ {n:"Crunch jambes levées",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Jambes levées genoux à 90°. Décolle les épaules en contractant les abdos."},
+ {n:"Relevés de jambes (bas-ventre)",g:"core",e:["bodyweight"],t:"isol",img:"",how:"Mains sous les fessiers, jambes tendues. Monte-les à la verticale, redescends lentement."},
+ {n:"Mountain climbers",g:"core",e:["bodyweight"],t:"cardio",img:"",how:"En position de pompe, ramène alternativement les genoux vers la poitrine rapidement."},
+ {n:"Course à pied — endurance (20–30 min)",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Allure modérée et régulière (tu peux parler) 20-30 min. Idéal pour brûler du gras."},
+ {n:"Course à pied — fractionné (30s vite / 1 min lent)",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Après échauffement, alterne 30 s rapide et 1 min de footing lent, sur 12-15 min."},
+ {n:"Course à pied — sprints courts",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"8-10 sprints de 20-30 s à fond, avec récupération complète (marche) entre chaque."},
+ {n:"Burpees",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Squat mains au sol, pieds en arrière (planche), une pompe, ramène, saute en l'air."},
+ {n:"Kettlebell / haltère swings",g:"cardio",e:["kettlebell","dumbbell"],t:"cardio",img:"",how:"Poids entre les jambes, propulse-le devant toi via une poussée explosive des hanches."},
+ {n:"Thrusters haltères",g:"cardio",e:["dumbbell"],t:"cardio",img:"",how:"Squat haltères aux épaules, puis pousse-les au-dessus de la tête en remontant."},
+ {n:"Squats sautés",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Squat puis saut explosif, réception souple, enchaîne."},
+ {n:"Montées de genoux / corde à sauter",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"Sur place, monte les genoux rapidement (ou saute à la corde)."},
+ {n:"Fentes sautées",g:"cardio",e:["bodyweight"],t:"cardio",img:"",how:"En fente, saute pour changer de jambe en l'air, réception contrôlée."}
 ];
 const EXMAP=Object.fromEntries(EX.map(x=>[x.n,x]));
 
-// Poids conseillés de départ (à ajuster — 2 dernières reps difficiles)
 const REC={
  "Développé couché haltères":"14–22 kg / haltère","Développé incliné haltères":"12–20 kg / haltère",
  "Écarté haltères":"8–14 kg / haltère","Rowing haltère unilatéral":"16–26 kg","Rowing haltères (deux bras)":"12–20 kg / haltère",
@@ -468,20 +456,135 @@ const REC={
  "Oiseau (deltoïde postérieur)":"5–10 kg / haltère","Élévations frontales haltères":"5–10 kg / haltère",
  "Curl haltères alterné":"8–14 kg / haltère","Curl marteau":"8–14 kg / haltère","Extension nuque haltère":"8–16 kg",
  "Kickback triceps haltère":"5–10 kg / haltère","Russian twists":"4–10 kg",
- "Leg extension (extension de jambes assis)":"règle la charge pour que les 2 dernières reps soient dures",
- "Leg extension unilatéral":"règle la charge pour que les 2 dernières reps soient dures"
+ "Leg extension (extension de jambes assis)":"charge où les 2 dernières reps sont dures","Leg extension unilatéral":"charge où les 2 dernières reps sont dures"
 };
 
-// Étirements optionnels selon le thème [nom, durée]
 const STRETCH={
- pecs:[["Étirement pectoraux (avant-bras contre un mur / cadre de porte)","30s / côté"],["Étirement épaules (bras croisé devant la poitrine)","30s / côté"],["Posture du cobra (ouverture de la poitrine)","30s"],["Étirement triceps (coude derrière la tête)","30s / côté"]],
- dos:[["Posture de l'enfant","45s"],["Chat-vache (dos rond puis dos creux)","8–10 cycles"],["Torsion vertébrale assise","30s / côté"],["Étirement grand dorsal (bras tendu, penche de côté)","30s / côté"]],
- jambes:[["Étirement quadriceps debout (talon vers le fessier)","30s / côté"],["Étirement ischios (jambe tendue, buste vers l'avant)","30s / côté"],["Étirement fessiers (figure 4 au sol)","30s / côté"],["Étirement mollets (appui mur, jambe arrière tendue)","30s / côté"],["Fente basse (étirement de la hanche)","30s / côté"]],
+ pecs:[["Étirement pectoraux (avant-bras contre un mur)","30s / côté"],["Étirement épaules (bras croisé devant)","30s / côté"],["Posture du cobra (ouverture poitrine)","30s"],["Étirement triceps (coude derrière la tête)","30s / côté"]],
+ dos:[["Posture de l'enfant","45s"],["Chat-vache (dos rond puis dos creux)","8–10 cycles"],["Torsion vertébrale assise","30s / côté"],["Étirement grand dorsal (penche de côté)","30s / côté"]],
+ jambes:[["Étirement quadriceps debout (talon au fessier)","30s / côté"],["Étirement ischios (jambe tendue, buste vers l'avant)","30s / côté"],["Étirement fessiers (figure 4 au sol)","30s / côté"],["Étirement mollets (appui mur)","30s / côté"],["Fente basse (hanche)","30s / côté"]],
  epaules:[["Étirement deltoïde (bras croisé devant)","30s / côté"],["Étirement épaule au cadre de porte","30s / côté"],["Étirement trapèze (oreille vers l'épaule)","30s / côté"],["Cercles d'épaules lents","30s"]],
  bras:[["Étirement biceps (bras tendu, paume au mur)","30s / côté"],["Étirement triceps (coude derrière la tête)","30s / côté"],["Étirement avant-bras (tire les doigts vers toi)","20s / côté"]],
- core:[["Posture du cobra (étirement des abdos)","30s"],["Étirement latéral debout (bras au-dessus, penche)","30s / côté"],["Torsion allongée (genoux d'un côté)","30s / côté"],["Posture de l'enfant (bas du dos)","45s"]],
+ core:[["Posture du cobra (étirement abdos)","30s"],["Étirement latéral debout (bras au-dessus, penche)","30s / côté"],["Torsion allongée (genoux d'un côté)","30s / côté"],["Posture de l'enfant (bas du dos)","45s"]],
  cardio:[["Étirement mollets au mur","30s / côté"],["Étirement quadriceps debout","30s / côté"],["Étirement ischios","30s / côté"],["Étirement fessiers (figure 4)","30s / côté"],["Étirement hanches (fente basse)","30s / côté"]]
 };
+
+/* ---------- Estimateur calories (base d'aliments locale, /100g) ---------- */
+const FOOD=[
+ {k:["blanc de poulet","escalope de poulet","poulet"],kcal:165,p:31,c:0,f:3.6,dg:120},
+ {k:["cuisse de poulet"],kcal:209,p:26,c:0,f:11,dg:120},
+ {k:["dinde"],kcal:135,p:29,c:0,f:1,dg:120},
+ {k:["boeuf hache 5","steak hache 5"],kcal:137,p:21,c:0,f:5,dg:125},
+ {k:["boeuf hache","steak hache","steak","boeuf"],kcal:217,p:20,c:0,f:15,dg:125},
+ {k:["porc"],kcal:242,p:27,c:0,f:14,dg:120},
+ {k:["jambon"],kcal:145,p:18,c:1,f:8,dg:50},
+ {k:["bacon","lardons"],kcal:540,p:37,c:1.4,f:42,dg:30},
+ {k:["saucisse","merguez"],kcal:300,p:13,c:2,f:27,dg:70},
+ {k:["oeuf"],kcal:155,p:13,c:1.1,f:11,dg:50},
+ {k:["thon"],kcal:116,p:26,c:0,f:1,dg:100},
+ {k:["saumon"],kcal:208,p:20,c:0,f:13,dg:120},
+ {k:["crevette"],kcal:99,p:24,c:0.2,f:0.3,dg:100},
+ {k:["cabillaud","poisson blanc","colin"],kcal:82,p:18,c:0,f:0.7,dg:120},
+ {k:["tofu"],kcal:144,p:15,c:3,f:9,dg:100},
+ {k:["riz cru","riz (cru)"],kcal:360,p:7,c:79,f:0.9,dg:75},
+ {k:["riz","riz cuit"],kcal:130,p:2.7,c:28,f:0.3,dg:150},
+ {k:["pates crues"],kcal:371,p:13,c:75,f:1.5,dg:75},
+ {k:["pates","pate"],kcal:158,p:6,c:31,f:0.9,dg:200},
+ {k:["pain complet"],kcal:247,p:13,c:41,f:3.4,dg:40},
+ {k:["pain"],kcal:265,p:9,c:49,f:3.2,dg:40},
+ {k:["pomme de terre","patate"],kcal:87,p:2,c:20,f:0.1,dg:200},
+ {k:["frites"],kcal:312,p:3.4,c:41,f:15,dg:150},
+ {k:["semoule","couscous"],kcal:112,p:3.8,c:23,f:0.2,dg:150},
+ {k:["quinoa"],kcal:120,p:4.4,c:21,f:1.9,dg:150},
+ {k:["flocons d'avoine","avoine","porridge"],kcal:389,p:17,c:66,f:7,dg:40},
+ {k:["lentilles"],kcal:116,p:9,c:20,f:0.4,dg:150},
+ {k:["pois chiches"],kcal:164,p:9,c:27,f:2.6,dg:150},
+ {k:["haricots rouges"],kcal:127,p:9,c:22,f:0.5,dg:150},
+ {k:["lait"],kcal:47,p:3.4,c:4.8,f:1.6,dg:200},
+ {k:["yaourt grec"],kcal:97,p:9,c:3.6,f:5,dg:150},
+ {k:["skyr"],kcal:63,p:11,c:4,f:0.2,dg:150},
+ {k:["fromage blanc"],kcal:72,p:8,c:4,f:3,dg:100},
+ {k:["yaourt"],kcal:61,p:3.5,c:4.7,f:3.3,dg:125},
+ {k:["mozzarella"],kcal:280,p:22,c:2,f:21,dg:60},
+ {k:["fromage","emmental","gruyere"],kcal:380,p:27,c:0,f:30,dg:30},
+ {k:["beurre"],kcal:717,p:0.9,c:0.1,f:81,dg:10,spoon:10},
+ {k:["creme fraiche","creme"],kcal:290,p:2.4,c:3,f:30,dg:30,spoon:15},
+ {k:["banane"],kcal:89,p:1.1,c:23,f:0.3,dg:120},
+ {k:["pomme"],kcal:52,p:0.3,c:14,f:0.2,dg:150},
+ {k:["orange"],kcal:47,p:0.9,c:12,f:0.1,dg:130},
+ {k:["fraise"],kcal:32,p:0.7,c:7.7,f:0.3,dg:100},
+ {k:["raisin"],kcal:69,p:0.7,c:18,f:0.2,dg:100},
+ {k:["kiwi"],kcal:61,p:1.1,c:15,f:0.5,dg:75},
+ {k:["mangue"],kcal:60,p:0.8,c:15,f:0.4,dg:150},
+ {k:["avocat"],kcal:160,p:2,c:9,f:15,dg:150},
+ {k:["amande"],kcal:579,p:21,c:22,f:50,dg:30},
+ {k:["noix"],kcal:654,p:15,c:14,f:65,dg:30},
+ {k:["cacahuete","arachide"],kcal:567,p:26,c:16,f:49,dg:30},
+ {k:["salade","laitue"],kcal:18,p:1.4,c:3,f:0.2,dg:80},
+ {k:["brocoli"],kcal:34,p:2.8,c:7,f:0.4,dg:150},
+ {k:["haricots verts"],kcal:31,p:1.8,c:7,f:0.1,dg:150},
+ {k:["tomate"],kcal:18,p:0.9,c:3.9,f:0.2,dg:120},
+ {k:["carotte"],kcal:41,p:0.9,c:10,f:0.2,dg:100},
+ {k:["courgette"],kcal:17,p:1.2,c:3,f:0.3,dg:150},
+ {k:["epinard"],kcal:23,p:2.9,c:3.6,f:0.4,dg:150},
+ {k:["poivron"],kcal:31,p:1,c:6,f:0.3,dg:120},
+ {k:["huile"],kcal:884,p:0,c:0,f:100,dg:10,spoon:12},
+ {k:["mayonnaise","mayo"],kcal:680,p:1,c:1.5,f:75,dg:15,spoon:15},
+ {k:["ketchup"],kcal:112,p:1.2,c:26,f:0.1,dg:15,spoon:15},
+ {k:["sauce tomate"],kcal:35,p:1.4,c:5,f:1,dg:100},
+ {k:["sucre"],kcal:400,p:0,c:100,f:0,dg:5,spoon:5},
+ {k:["miel"],kcal:304,p:0.3,c:82,f:0,dg:20,spoon:20},
+ {k:["nutella","pate a tartiner"],kcal:539,p:6,c:57,f:31,dg:20,spoon:20},
+ {k:["confiture"],kcal:250,p:0.4,c:60,f:0.1,dg:20,spoon:20},
+ {k:["chocolat"],kcal:546,p:5,c:61,f:31,dg:25},
+ {k:["pizza"],kcal:266,p:11,c:33,f:10,dg:300},
+ {k:["hamburger","burger"],kcal:250,p:15,c:17,f:13,dg:220},
+ {k:["kebab"],kcal:215,p:15,c:16,f:11,dg:350},
+ {k:["sandwich"],kcal:250,p:10,c:30,f:9,dg:200},
+ {k:["pates bolognaise","bolognaise","spaghetti bolognaise"],kcal:150,p:7,c:18,f:5,dg:350},
+ {k:["lasagne"],kcal:135,p:8,c:11,f:6,dg:300},
+ {k:["sushi","maki"],kcal:140,p:5,c:30,f:1,dg:200},
+ {k:["nuggets"],kcal:290,p:15,c:16,f:18,dg:100},
+ {k:["quiche"],kcal:280,p:9,c:18,f:19,dg:150},
+ {k:["crepe"],kcal:200,p:6,c:30,f:6,dg:80},
+ {k:["soupe"],kcal:40,p:1.5,c:6,f:1,dg:250},
+ {k:["riz cantonais"],kcal:150,p:5,c:22,f:5,dg:300},
+ {k:["coca","soda"],kcal:42,p:0,c:10.6,f:0,dg:330},
+ {k:["jus d'orange","jus de fruit","jus"],kcal:45,p:0.7,c:10,f:0.2,dg:200},
+ {k:["biere"],kcal:43,p:0.5,c:3.6,f:0,dg:250},
+ {k:["chips"],kcal:536,p:6,c:53,f:34,dg:30},
+ {k:["biscuit","cookie"],kcal:480,p:6,c:64,f:22,dg:30},
+ {k:["barre chocolatee"],kcal:480,p:5,c:60,f:24,dg:45},
+ {k:["croissant"],kcal:406,p:8,c:46,f:21,dg:60},
+ {k:["whey","proteine"],kcal:380,p:75,c:8,f:6,dg:30},
+ {k:["glace"],kcal:207,p:3.5,c:24,f:11,dg:100}
+];
+const NUM={un:1,une:1,deux:2,trois:3,quatre:4,cinq:5,six:6,demi:0.5};
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");}
+function estimateMeal(text){
+  let kcal=0,p=0,c=0,f=0;const got=[];
+  text.split(/[,\n;+]|\bet\b|\bavec\b/i).forEach(raw=>{
+    const s=norm(raw).trim();if(!s)return;
+    let grams=null;
+    let mg=s.match(/(\d+[.,]?\d*)\s*(kg|g|gr|gramme|grammes)\b/);
+    if(mg){grams=parseFloat(mg[1].replace(",","."));if(mg[2]==="kg")grams*=1000;}
+    if(grams===null){let ml=s.match(/(\d+[.,]?\d*)\s*(ml|cl|l|litre)\b/);if(ml){let v=parseFloat(ml[1].replace(",","."));if(ml[2]==="cl")v*=10;else if(ml[2]==="l"||ml[2]==="litre")v*=1000;grams=v;}}
+    let count=null;
+    if(grams===null){let cm=s.match(/(\d+[.,]?\d*)/);if(cm)count=parseFloat(cm[1].replace(",","."));}
+    if(count===null){for(const w in NUM){if(new RegExp("\\b"+w+"\\b").test(s)){count=NUM[w];break;}}}
+    const spoon=/cuiller|cuillere|c\.\s?a|cas\b|cac\b/.test(s);
+    let food=null,best=0;
+    for(const fd of FOOD){for(const a of fd.k){const an=norm(a);if(s.includes(an)&&an.length>best){food=fd;best=an.length;}}}
+    if(!food)return;
+    let g;
+    if(grams!==null)g=grams;
+    else if(spoon)g=(count||1)*(food.spoon||12);
+    else if(count!==null)g=count*(food.dg||100);
+    else g=food.dg||100;
+    kcal+=g/100*food.kcal;p+=g/100*food.p;c+=g/100*food.c;f+=g/100*food.f;got.push(food.k[0]);
+  });
+  return{kcal:Math.round(kcal),p:Math.round(p),c:Math.round(c),f:Math.round(f),got};
+}
 
 function esc(s){return String(s).replace(/'/g,"\\'");}
 function saveWeight(name,val){if(!DB.weights)DB.weights={};val=String(val).trim();if(val)DB.weights[name]=val;else delete DB.weights[name];save();}
@@ -518,13 +621,8 @@ function detailHTML(name,meta){
 function toggleInfo(btn){const d=btn.nextElementSibling;if(!d)return;d.style.display=d.style.display==="none"?"block":"none";}
 
 const PLAN={
- 1:{am:"pecs",pm:"jambes"},   // Lun
- 2:{am:"dos",pm:"epaules"},   // Mar
- 3:{am:"bras",pm:"core"},     // Mer
- 4:{am:"cardio",pm:"pecs"},   // Jeu
- 5:{am:"jambes",pm:"dos"},    // Ven
- 6:{am:"epaules",pm:"bras"},  // Sam
- 0:{am:"core",pm:"cardio"}    // Dim
+ 1:{am:"pecs",pm:"jambes"},2:{am:"dos",pm:"epaules"},3:{am:"bras",pm:"core"},
+ 4:{am:"cardio",pm:"pecs"},5:{am:"jambes",pm:"dos"},6:{am:"epaules",pm:"bras"},0:{am:"core",pm:"cardio"}
 };
 const GLABEL={pecs:"Pectoraux",dos:"Dos",jambes:"Jambes / fessiers",epaules:"Épaules",bras:"Bras",core:"Abdos / gainage",cardio:"Cardio / conditionnement"};
 
@@ -572,12 +670,8 @@ function buildSession(group,slot,salt){
 
 function getSessions(key){
   if(!DB.sessions[key]){
-    const d=new Date(key+"T12:00:00");
-    const p=PLAN[d.getDay()];
-    DB.sessions[key]={
-      am:{focus:p.am,exos:buildSession(p.am,"am",key),done:false},
-      pm:{focus:p.pm,exos:buildSession(p.pm,"pm",key),done:false}
-    };
+    const d=new Date(key+"T12:00:00");const p=PLAN[d.getDay()];
+    DB.sessions[key]={am:{focus:p.am,exos:buildSession(p.am,"am",key),done:false},pm:{focus:p.pm,exos:buildSession(p.pm,"pm",key),done:false}};
     save();
   }
   return DB.sessions[key];
@@ -630,32 +724,22 @@ function renderDash(){
   document.getElementById("dWater").textContent=(d.water/1000).toFixed(1)+" L";
   document.getElementById("dWeight").textContent=d.weight?d.weight:"—";
   const pct=Math.min(100,tgt?tot/tgt*100:0);
-  const bar=document.getElementById("dCalBar");bar.style.width=pct+"%";
-  bar.style.background=tot>tgt?"var(--bad)":"var(--grad)";
+  const bar=document.getElementById("dCalBar");bar.style.width=pct+"%";bar.style.background=tot>tgt?"var(--bad)":"var(--grad)";
   const rest=tgt-tot;
   document.getElementById("dCalTxt").textContent=rest>=0?rest+" kcal restantes pour atteindre ta cible.":Math.abs(rest)+" kcal au-dessus de ta cible.";
   document.getElementById("dSessions").innerHTML=sessLine("am",s.am)+sessLine("pm",s.pm);
-  function sessLine(slot,o){const c=cnt(o);
-    return `<div class="item"><span><span class="pill ${slot}">${slot==="am"?"MATIN":"APRÈM"}</span> ${GLABEL[o.focus]}</span><b>${c.done}/${c.total}</b></div>`;}
+  function sessLine(slot,o){const c=cnt(o);return `<div class="item"><span><span class="pill ${slot}">${slot==="am"?"MATIN":"APRÈM"}</span> ${GLABEL[o.focus]}</span><b>${c.done}/${c.total}</b></div>`;}
   drawWeight("dChart");
   const w=weightSeries();
-  if(w.length>=2){const diff=(w[w.length-1].v-w[0].v).toFixed(1);
-    document.getElementById("dWeightDelta").textContent=(diff>0?"+":"")+diff+" kg depuis le début";}
+  if(w.length>=2){const diff=(w[w.length-1].v-w[0].v).toFixed(1);document.getElementById("dWeightDelta").textContent=(diff>0?"+":"")+diff+" kg depuis le début";}
   else document.getElementById("dWeightDelta").textContent="Enregistre ton poids régulièrement pour voir la courbe.";
 }
 
 function renderSessions(){
-  const k=iso(viewDate);const s=getSessions(k);
-  const same=k===todayIso();
-  document.getElementById("sessWrap").innerHTML=
-    `<div class="muted" style="margin-bottom:10px">${same?"Aujourd'hui · ":""}${frDate(viewDate)}</div>`+
-    block("am",s.am,k)+block("pm",s.pm,k);
-  const hist=Object.keys(DB.sessions).sort().reverse().slice(0,10).map(d=>{
-    const ss=DB.sessions[d];const a=cnt(ss.am),p=cnt(ss.pm);
-    return `<div class="item"><span>${d}</span><span class="muted">Matin ${a.done}/${a.total} · Aprèm ${p.done}/${p.total}</span></div>`;
-  }).join("");
+  const k=iso(viewDate);const s=getSessions(k);const same=k===todayIso();
+  document.getElementById("sessWrap").innerHTML=`<div class="muted" style="margin-bottom:10px">${same?"Aujourd'hui · ":""}${frDate(viewDate)}</div>`+block("am",s.am,k)+block("pm",s.pm,k);
+  const hist=Object.keys(DB.sessions).sort().reverse().slice(0,10).map(d=>{const ss=DB.sessions[d];const a=cnt(ss.am),p=cnt(ss.pm);return `<div class="item"><span>${d}</span><span class="muted">Matin ${a.done}/${a.total} · Aprèm ${p.done}/${p.total}</span></div>`;}).join("");
   document.getElementById("sessHist").innerHTML=hist||"Aucune séance enregistrée.";
-
   function block(slot,o,key){
     let html="";
     o.exos.forEach((e,i)=>{
@@ -670,12 +754,10 @@ function renderSessions(){
     if(st.length){
       sh=`<div class="exo" style="border-color:rgba(74,222,128,.4)"><button class="info stretchbtn" onclick="toggleInfo(this)">🧘 Étirements (optionnel) · ${st.length} exos</button>`+
          `<div class="exodetail" style="display:none">`+
-         st.map(e=>`<div class="stretchrow"><b>${e.txt}</b><span class="meta">${e.meta}</span></div>`).join("")+
+         st.map(e=>`<div class="stretchrow"><span><b>${e.txt}</b><br><span class="meta">${e.meta}</span></span><a class="sdemo" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.txt+" étirement")}" target="_blank" rel="noopener">▶ démo</a></div>`).join("")+
          `</div></div>`;
     }
-    return `<div class="card" style="background:var(--card2)">
-      <div class="sesshead"><div class="t"><span class="pill ${slot}">${slot==="am"?"MATIN · 1h":"APRÈS-MIDI · 1h"}</span> ${GLABEL[o.focus]}</div></div>
-      ${html}${sh}</div>`;
+    return `<div class="card" style="background:var(--card2)"><div class="sesshead"><div class="t"><span class="pill ${slot}">${slot==="am"?"MATIN · 1h":"APRÈS-MIDI · 1h"}</span> ${GLABEL[o.focus]}</div></div>${html}${sh}</div>`;
   }
 }
 function toggleEx(key,slot,i){
@@ -686,74 +768,31 @@ function toggleEx(key,slot,i){
 }
 function confetti(){
   const colors=["#a855f7","#e879f9","#7c3aed","#c084fc","#fbbf24","#fb7185"];
-  for(let i=0;i<40;i++){
-    const sp=document.createElement("span");sp.className="confetti";
-    sp.style.left=Math.random()*100+"vw";
-    sp.style.background=colors[i%colors.length];
-    sp.style.animationDelay=(Math.random()*0.35)+"s";
-    sp.style.height=(10+Math.random()*8)+"px";
-    document.body.appendChild(sp);
-    setTimeout(()=>sp.remove(),2800);
-  }
+  for(let i=0;i<40;i++){const sp=document.createElement("span");sp.className="confetti";sp.style.left=Math.random()*100+"vw";sp.style.background=colors[i%colors.length];sp.style.animationDelay=(Math.random()*0.35)+"s";sp.style.height=(10+Math.random()*8)+"px";document.body.appendChild(sp);setTimeout(()=>sp.remove(),2800);}
 }
 
-/* ---------- Minuteur Tabata ---------- */
+/* ---------- Minuteur ---------- */
 let AC=null;
 function ensureAudio(){try{if(!AC){const A=window.AudioContext||window.webkitAudioContext;if(A)AC=new A();}if(AC&&AC.state==="suspended")AC.resume();}catch(e){}}
 function beep(f,d){if(!AC)return;try{const o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);o.type="sine";o.frequency.value=f;const t=AC.currentTime;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.4,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.start(t);o.stop(t+d+0.02);}catch(e){}}
 let TI=null,TS=null;
 function tEl(id){return document.getElementById(id);}
-function openTimer(work,rest,rounds,name){
-  tEl("tWork").value=work;tEl("tRest").value=rest;tEl("tRounds").value=rounds;
-  tEl("tName").textContent=name||"";tEl("timerOverlay").style.display="flex";
-  TS=null;tResetView();
-}
-function tResetView(){
-  if(TI){clearInterval(TI);TI=null;}
-  tEl("tPhase").textContent="PRÊT";tEl("tPhase").style.color="var(--mut)";
-  tEl("tNum").textContent="--";tEl("tRound").textContent="";tEl("tStart").textContent="Démarrer";
-}
-function tRender(){
-  const names={prep:"PRÉPARATION",work:"EFFORT",rest:"REPOS",done:"TERMINÉ"};
-  tEl("tPhase").textContent=names[TS.phase]||"";
-  tEl("tPhase").style.color=TS.phase==="work"?"var(--acc)":TS.phase==="rest"?"var(--acc2)":TS.phase==="done"?"var(--ok)":"var(--mut)";
-  tEl("tNum").textContent=TS.phase==="done"?"✓":String(Math.max(0,TS.left)).padStart(2,"0");
-  tEl("tRound").textContent=TS.phase==="done"?"Bravo !":("Tour "+TS.round+" / "+TS.rounds);
-}
-function tNextRound(){
-  if(TS.round>=TS.rounds){TS.phase="done";clearInterval(TI);TI=null;beep(660,.5);tEl("tStart").textContent="Rejouer";}
-  else{TS.round++;TS.phase="work";TS.left=TS.work;beep(880,.15);}
-}
-function tAdvance(){
-  if(TS.phase==="prep"){if(TS.work>0){TS.phase="work";TS.left=TS.work;beep(880,.15);}else{TS.phase="rest";TS.left=TS.rest;beep(440,.2);}}
-  else if(TS.phase==="work"){if(TS.rest>0){TS.phase="rest";TS.left=TS.rest;beep(440,.2);}else tNextRound();}
-  else if(TS.phase==="rest"){tNextRound();}
-}
+function openTimer(work,rest,rounds,name){tEl("tWork").value=work;tEl("tRest").value=rest;tEl("tRounds").value=rounds;tEl("tName").textContent=name||"";tEl("timerOverlay").style.display="flex";TS=null;tResetView();}
+function tResetView(){if(TI){clearInterval(TI);TI=null;}tEl("tPhase").textContent="PRÊT";tEl("tPhase").style.color="var(--mut)";tEl("tNum").textContent="--";tEl("tRound").textContent="";tEl("tStart").textContent="Démarrer";}
+function tRender(){const names={prep:"PRÉPARATION",work:"EFFORT",rest:"REPOS",done:"TERMINÉ"};tEl("tPhase").textContent=names[TS.phase]||"";tEl("tPhase").style.color=TS.phase==="work"?"var(--acc)":TS.phase==="rest"?"var(--acc2)":TS.phase==="done"?"var(--ok)":"var(--mut)";tEl("tNum").textContent=TS.phase==="done"?"✓":String(Math.max(0,TS.left)).padStart(2,"0");tEl("tRound").textContent=TS.phase==="done"?"Bravo !":("Tour "+TS.round+" / "+TS.rounds);}
+function tNextRound(){if(TS.round>=TS.rounds){TS.phase="done";clearInterval(TI);TI=null;beep(660,.5);tEl("tStart").textContent="Rejouer";}else{TS.round++;TS.phase="work";TS.left=TS.work;beep(880,.15);}}
+function tAdvance(){if(TS.phase==="prep"){if(TS.work>0){TS.phase="work";TS.left=TS.work;beep(880,.15);}else{TS.phase="rest";TS.left=TS.rest;beep(440,.2);}}else if(TS.phase==="work"){if(TS.rest>0){TS.phase="rest";TS.left=TS.rest;beep(440,.2);}else tNextRound();}else if(TS.phase==="rest"){tNextRound();}}
 function tTick(){TS.left--;if(TS.left<=0&&TS.phase!=="done")tAdvance();tRender();}
-function tStart(){
-  ensureAudio();
-  if(TI){clearInterval(TI);TI=null;tEl("tStart").textContent="Reprendre";return;}
-  const work=+tEl("tWork").value||0,rest=+tEl("tRest").value||0,rounds=+tEl("tRounds").value||1;
-  if(!TS||TS.phase==="done"){TS={phase:"prep",left:3,work,rest,rounds,round:1};}
-  tEl("tStart").textContent="Pause";beep(330,.1);tRender();
-  TI=setInterval(tTick,1000);
-}
+function tStart(){ensureAudio();if(TI){clearInterval(TI);TI=null;tEl("tStart").textContent="Reprendre";return;}const work=+tEl("tWork").value||0,rest=+tEl("tRest").value||0,rounds=+tEl("tRounds").value||1;if(!TS||TS.phase==="done"){TS={phase:"prep",left:3,work,rest,rounds,round:1};}tEl("tStart").textContent="Pause";beep(330,.1);tRender();TI=setInterval(tTick,1000);}
 
 function renderCalories(){
   const k=todayIso();const d=dayData(k);const tgt=calTarget();
-  const tot=d.foods.reduce((s,f)=>s+(+f.kcal||0),0);
-  const prot=d.foods.reduce((s,f)=>s+(+f.prot||0),0);
-  const gluc=d.foods.reduce((s,f)=>s+(+f.gluc||0),0);
-  const lip=d.foods.reduce((s,f)=>s+(+f.lip||0),0);
-  document.getElementById("cTot").textContent=tot;
-  document.getElementById("cRest").textContent=tgt-tot;
-  const bar=document.getElementById("cBar");bar.style.width=Math.min(100,tgt?tot/tgt*100:0)+"%";
-  bar.style.background=tot>tgt?"var(--bad)":"var(--grad)";
+  const tot=d.foods.reduce((s,f)=>s+(+f.kcal||0),0);const prot=d.foods.reduce((s,f)=>s+(+f.prot||0),0);
+  const gluc=d.foods.reduce((s,f)=>s+(+f.gluc||0),0);const lip=d.foods.reduce((s,f)=>s+(+f.lip||0),0);
+  document.getElementById("cTot").textContent=tot;document.getElementById("cRest").textContent=tgt-tot;
+  const bar=document.getElementById("cBar");bar.style.width=Math.min(100,tgt?tot/tgt*100:0)+"%";bar.style.background=tot>tgt?"var(--bad)":"var(--grad)";
   document.getElementById("cMacro").textContent=`Protéines ${Math.round(prot)}g · Glucides ${Math.round(gluc)}g · Lipides ${Math.round(lip)}g · Objectif protéines ${protTarget()}g`;
-  document.getElementById("foodList").innerHTML=d.foods.map((f,i)=>
-    `<div class="item"><span><b>${f.name}</b> <span class="muted">${f.prot||0}P ${f.gluc||0}G ${f.lip||0}L</span></span>
-     <span><b>${f.kcal} kcal</b> <span class="x" onclick="delFood(${i})">✕</span></span></div>`
-  ).join("")||'<div class="muted">Aucun aliment ajouté aujourd\'hui.</div>';
+  document.getElementById("foodList").innerHTML=d.foods.map((f,i)=>`<div class="item"><span><b>${f.name}</b> <span class="muted">${f.prot||0}P ${f.gluc||0}G ${f.lip||0}L</span></span><span><b>${f.kcal} kcal</b> <span class="x" onclick="delFood(${i})">✕</span></span></div>`).join("")||'<div class="muted">Aucun aliment ajouté aujourd\'hui.</div>';
 }
 function delFood(i){dayData(todayIso()).foods.splice(i,1);save();renderCalories();renderDash();}
 
@@ -762,126 +801,101 @@ function renderHydra(){
   document.getElementById("hAmount").textContent=(d.water/1000).toFixed(2)+" L";
   document.getElementById("hGoal").textContent="Objectif : "+(tgt/1000).toFixed(1)+" L ("+Math.round(tgt/250)+" verres)";
   document.getElementById("hBar").style.width=Math.min(100,d.water/tgt*100)+"%";
-  const full=Math.floor(d.water/250),goalG=Math.round(tgt/250);
-  let g="";for(let i=0;i<goalG;i++)g+=i<full?"🟣":"⚪";
+  const full=Math.floor(d.water/250),goalG=Math.round(tgt/250);let g="";for(let i=0;i<goalG;i++)g+=i<full?"🟣":"⚪";
   document.getElementById("hGlasses").textContent=g;
 }
 
-function weightSeries(){return Object.keys(DB.days).filter(k=>DB.days[k].weight).sort()
-  .map(k=>({d:k,v:+DB.days[k].weight}));}
+function weightSeries(){return Object.keys(DB.days).filter(k=>DB.days[k].weight).sort().map(k=>({d:k,v:+DB.days[k].weight}));}
 function renderPoids(){
-  drawWeight("wChart");
-  const s=weightSeries();
+  drawWeight("wChart");const s=weightSeries();
   document.getElementById("wStart").textContent=s.length?s[0].v:"—";
   document.getElementById("wNow").textContent=s.length?s[s.length-1].v:(DB.profile.poidsActuel||"—");
   document.getElementById("wGoal").textContent=DB.profile.poidsObjectif||"—";
-  if(s.length>=2){const diff=(s[s.length-1].v-s[0].v).toFixed(1);
-    const el=document.getElementById("wDelta");el.textContent=(diff>0?"+":"")+diff+" kg";}
+  if(s.length>=2){const diff=(s[s.length-1].v-s[0].v).toFixed(1);document.getElementById("wDelta").textContent=(diff>0?"+":"")+diff+" kg";}
   else document.getElementById("wDelta").textContent="—";
 }
 function drawWeight(id){
   const c=document.getElementById(id);if(!c)return;const ctx=c.getContext("2d");
   const W=c.width,H=c.height;ctx.clearRect(0,0,W,H);
-  const s=weightSeries();const pad=38;
+  const s=weightSeries();const padL=42,padR=14,padT=14,padB=26;
   const goal=+DB.profile.poidsObjectif;
-  if(s.length<1){ctx.fillStyle="#a99dca";ctx.font="14px sans-serif";ctx.textAlign="center";
-    ctx.fillText("Pas encore de données de poids",W/2,H/2);return;}
+  if(s.length<1){ctx.fillStyle="#a99dca";ctx.font="14px sans-serif";ctx.textAlign="center";ctx.fillText("Pas encore de données de poids",W/2,H/2);return;}
   let vals=s.map(p=>p.v);if(goal)vals.push(goal);
   let mn=Math.min(...vals),mx=Math.max(...vals);if(mn===mx){mn-=1;mx+=1;}
-  const rng=mx-mn;mn-=rng*0.1;mx+=rng*0.1;
-  const x=i=>pad+(W-pad-12)*(s.length===1?0.5:i/(s.length-1));
-  const y=v=>H-pad-(H-pad-14)*((v-mn)/(mx-mn));
+  const rng=mx-mn;mn-=rng*0.12;mx+=rng*0.12;
+  const times=s.map(p=>new Date(p.d+"T12:00:00").getTime());
+  let t0=Math.min(...times),t1=Math.max(...times);if(t0===t1){t0-=86400000;t1+=86400000;}
+  const X=t=>padL+(W-padL-padR)*((t-t0)/(t1-t0));
+  const Y=v=>padT+(H-padT-padB)*(1-(v-mn)/(mx-mn));
+  // grille + axe Y (poids)
   ctx.strokeStyle="#372a5e";ctx.lineWidth=1;ctx.fillStyle="#a99dca";ctx.font="11px sans-serif";ctx.textAlign="right";
-  for(let i=0;i<=4;i++){const v=mn+(mx-mn)*i/4;const yy=y(v);
-    ctx.beginPath();ctx.moveTo(pad,yy);ctx.lineTo(W-12,yy);ctx.stroke();
-    ctx.fillText(v.toFixed(1),pad-6,yy+4);}
-  if(goal){ctx.strokeStyle="#e879f9";ctx.setLineDash([6,5]);ctx.beginPath();
-    ctx.moveTo(pad,y(goal));ctx.lineTo(W-12,y(goal));ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle="#e879f9";ctx.textAlign="left";ctx.fillText("objectif "+goal,pad+4,y(goal)-5);}
+  for(let i=0;i<=4;i++){const v=mn+(mx-mn)*i/4;const yy=Y(v);ctx.beginPath();ctx.moveTo(padL,yy);ctx.lineTo(W-padR,yy);ctx.stroke();ctx.fillText(v.toFixed(1),padL-6,yy+4);}
+  // ligne objectif
+  if(goal){ctx.strokeStyle="#e879f9";ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(padL,Y(goal));ctx.lineTo(W-padR,Y(goal));ctx.stroke();ctx.setLineDash([]);ctx.fillStyle="#e879f9";ctx.textAlign="left";ctx.fillText("objectif "+goal,padL+4,Y(goal)-5);}
+  // axe X = temps (dates)
+  ctx.fillStyle="#a99dca";ctx.font="10px sans-serif";ctx.textAlign="center";
+  const fmt=ts=>{const d=new Date(ts);return d.getDate()+"/"+(d.getMonth()+1);};
+  ctx.fillText(fmt(t0),X(t0),H-8);
+  if(s.length>2)ctx.fillText(fmt((t0+t1)/2),X((t0+t1)/2),H-8);
+  ctx.fillText(fmt(t1),X(t1),H-8);
+  // courbe poids dans le temps
   ctx.strokeStyle="#a855f7";ctx.lineWidth=2.5;ctx.beginPath();
-  s.forEach((p,i)=>{i?ctx.lineTo(x(i),y(p.v)):ctx.moveTo(x(i),y(p.v));});ctx.stroke();
-  ctx.fillStyle="#a855f7";s.forEach((p,i)=>{ctx.beginPath();ctx.arc(x(i),y(p.v),3.5,0,7);ctx.fill();});
+  s.forEach((p,i)=>{const xx=X(times[i]),yy=Y(p.v);i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);});ctx.stroke();
+  ctx.fillStyle="#a855f7";s.forEach((p,i)=>{ctx.beginPath();ctx.arc(X(times[i]),Y(p.v),3.5,0,7);ctx.fill();});
 }
 
 function renderProfil(){
   const p=DB.profile;
-  pNom.value=p.nom||"";pSex.value=p.sexe;pAge.value=p.age;pHeight.value=p.taille;pWeight.value=p.poidsActuel;
-  pGoal.value=p.poidsObjectif;pAct.value=p.activite;
+  pNom.value=p.nom||"";pSex.value=p.sexe;pAge.value=p.age;pHeight.value=p.taille;pWeight.value=p.poidsActuel;pGoal.value=p.poidsObjectif;pAct.value=p.activite;
   document.getElementById("pCalcOut").innerHTML=
     "Métabolisme de base : <b>"+Math.round(bmr())+"</b> kcal · Dépense totale : <b>"+Math.round(tdee())+"</b> kcal<br>"+
     "🎯 Cible recomposition : <b style='color:var(--acc2)'>"+calTarget()+" kcal/jour</b> · Protéines : <b>"+protTarget()+" g</b> · Eau : <b>"+(waterTarget()/1000).toFixed(1)+" L</b>"+
     "<br><span style='color:var(--mut)'>Léger déficit (-15%) + protéines élevées = perte de gras en préservant/construisant du muscle.</span>";
   const chips=document.getElementById("equipChips");
-  chips.innerHTML=EQUIP.map(([id,lab])=>
-    `<span class="tag ${(p.equip||[]).includes(id)?'on':''}" data-eq="${id}">${lab}</span>`).join("");
-  chips.querySelectorAll(".tag").forEach(t=>t.onclick=()=>{
-    const id=t.dataset.eq;p.equip=p.equip||[];
-    if(p.equip.includes(id))p.equip=p.equip.filter(x=>x!==id);else p.equip.push(id);
-    if(!p.equip.length)p.equip=["bodyweight"];
-    save();renderProfil();
-  });
+  chips.innerHTML=EQUIP.map(([id,lab])=>`<span class="tag ${(p.equip||[]).includes(id)?'on':''}" data-eq="${id}">${lab}</span>`).join("");
+  chips.querySelectorAll(".tag").forEach(t=>t.onclick=()=>{const id=t.dataset.eq;p.equip=p.equip||[];if(p.equip.includes(id))p.equip=p.equip.filter(x=>x!==id);else p.equip.push(id);if(!p.equip.length)p.equip=["bodyweight"];save();renderProfil();});
 }
 
 document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("#nav button").forEach(x=>x.classList.remove("active"));
   document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active");
-  document.getElementById(b.dataset.v).classList.add("active");
-  renderAll();
+  b.classList.add("active");document.getElementById(b.dataset.v).classList.add("active");renderAll();
 });
 
+document.getElementById("estBtn").onclick=()=>{
+  const txt=fDesc.value.trim();if(!txt){toast("Décris ton plat d'abord");return;}
+  const r=estimateMeal(txt);
+  if(!r.got.length){toast("Aliment non reconnu — saisis à la main");return;}
+  if(!fName.value.trim())fName.value=txt.slice(0,40);
+  fKcal.value=r.kcal;fProt.value=r.p;fGluc.value=r.c;fLip.value=r.f;
+  toast("≈ "+r.kcal+" kcal · "+[...new Set(r.got)].join(", "));
+};
 document.getElementById("addFood").onclick=()=>{
   const name=fName.value.trim(),kcal=+fKcal.value;
   if(!name||!kcal){toast("Nom et kcal requis");return;}
   dayData(todayIso()).foods.push({name,kcal,prot:+fProt.value||0,gluc:+fGluc.value||0,lip:+fLip.value||0});
-  save();fName.value=fKcal.value=fProt.value=fGluc.value=fLip.value="";
+  save();fName.value=fKcal.value=fProt.value=fGluc.value=fLip.value=fDesc.value="";
   renderCalories();renderDash();toast("Ajouté ✓");
 };
-document.querySelectorAll("[data-ml]").forEach(b=>b.onclick=()=>{
-  const d=dayData(todayIso());d.water=Math.max(0,d.water+(+b.dataset.ml));save();renderHydra();renderDash();
-});
-document.getElementById("wSave").onclick=()=>{
-  const v=+wInput.value;if(!v){toast("Entre un poids");return;}
-  dayData(todayIso()).weight=v;DB.profile.poidsActuel=v;save();wInput.value="";
-  renderPoids();renderDash();toast("Poids enregistré ✓");
-};
-document.getElementById("pSave").onclick=()=>{
-  const p=DB.profile;
-  p.nom=pNom.value.trim();p.sexe=pSex.value;p.age=+pAge.value||18;p.taille=+pHeight.value||176;
-  p.poidsActuel=+pWeight.value||100;p.poidsObjectif=+pGoal.value||85;p.activite=+pAct.value;
-  save();renderProfil();renderDash();toast("Profil enregistré ✓");
-};
+document.querySelectorAll("[data-ml]").forEach(b=>b.onclick=()=>{const d=dayData(todayIso());d.water=Math.max(0,d.water+(+b.dataset.ml));save();renderHydra();renderDash();});
+document.getElementById("hAddCustom").onclick=()=>{const v=+document.getElementById("hCustom").value;if(!v){toast("Entre une quantité");return;}const d=dayData(todayIso());d.water=Math.max(0,d.water+v);save();document.getElementById("hCustom").value="";renderHydra();renderDash();};
+document.getElementById("wSave").onclick=()=>{const v=+wInput.value;if(!v){toast("Entre un poids");return;}dayData(todayIso()).weight=v;DB.profile.poidsActuel=v;save();wInput.value="";renderPoids();renderDash();toast("Poids enregistré ✓");};
+document.getElementById("pSave").onclick=()=>{const p=DB.profile;p.nom=pNom.value.trim();p.sexe=pSex.value;p.age=+pAge.value||18;p.taille=+pHeight.value||176;p.poidsActuel=+pWeight.value||100;p.poidsObjectif=+pGoal.value||85;p.activite=+pAct.value;save();renderProfil();renderDash();toast("Profil enregistré ✓");};
 document.getElementById("regenBtn").onclick=()=>regen(iso(viewDate));
 document.getElementById("prevDay").onclick=()=>{viewDate.setDate(viewDate.getDate()-1);renderSessions();};
 document.getElementById("nextDay").onclick=()=>{viewDate.setDate(viewDate.getDate()+1);renderSessions();};
 document.getElementById("tStart").onclick=tStart;
 document.getElementById("tReset").onclick=()=>{TS=null;tResetView();};
 document.getElementById("tClose").onclick=()=>{if(TI){clearInterval(TI);TI=null;}document.getElementById("timerOverlay").style.display="none";};
-
-document.getElementById("exportBtn").onclick=()=>{
-  const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-  a.download="fittrack-sauvegarde-"+todayIso()+".json";a.click();toast("Export prêt ✓");
-};
+document.getElementById("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="fittrack-sauvegarde-"+todayIso()+".json";a.click();toast("Export prêt ✓");};
 document.getElementById("importBtn").onclick=()=>importFile.click();
-document.getElementById("importFile").onchange=e=>{
-  const f=e.target.files[0];if(!f)return;const r=new FileReader();
-  r.onload=()=>{try{DB=JSON.parse(r.result);save();renderAll();toast("Importé ✓");}
-    catch(x){toast("Fichier invalide");}};r.readAsText(f);
-};
-document.getElementById("resetBtn").onclick=()=>{
-  if(confirm("Effacer TOUTES les données ? Cette action est irréversible.")){
-    DB=structuredClone(DEFAULT);save();renderAll();toast("Données effacées");}
-};
+document.getElementById("importFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{DB=JSON.parse(r.result);save();renderAll();toast("Importé ✓");}catch(x){toast("Fichier invalide");}};r.readAsText(f);};
+document.getElementById("resetBtn").onclick=()=>{if(confirm("Effacer TOUTES les données ? Cette action est irréversible.")){DB=structuredClone(DEFAULT);save();renderAll();toast("Données effacées");}};
 
 function renderAll(){renderDash();renderSessions();renderCalories();renderHydra();renderPoids();renderProfil();}
 document.getElementById("todayLabel").textContent=frDate(new Date());
 renderAll();
-if(!localStorage.getItem("fittrack_seen")){
-  localStorage.setItem("fittrack_seen","1");
-  document.querySelector('#nav button[data-v="profil"]').click();
-  setTimeout(()=>toast("Bienvenue 👋 Configure ton profil ici !"),500);
-}
+if(!localStorage.getItem("fittrack_seen")){localStorage.setItem("fittrack_seen","1");document.querySelector('#nav button[data-v="profil"]').click();setTimeout(()=>toast("Bienvenue 👋 Configure ton profil ici !"),500);}
 </script>
 </body>
 </html>
