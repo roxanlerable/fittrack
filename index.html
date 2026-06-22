@@ -130,7 +130,6 @@
     pointer-events:none;animation:confettiFall 2.3s linear forwards}
   @keyframes confettiFall{0%{opacity:1}to{transform:translateY(108vh) rotate(620deg);opacity:.15}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-  /* fiche exercice */
   .exohead{cursor:pointer}
   .info{margin-top:9px;background:rgba(168,85,247,.16);color:var(--acc2);border:1px solid var(--line);
     border-radius:10px;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer}
@@ -309,7 +308,7 @@
   </section>
 
 </main>
-<footer>FitTrack · 100% local · tes données ne quittent pas ton appareil</footer>
+<footer>FitTrack · <b style="color:var(--acc2)">v5</b> · 100% local · tes données ne quittent pas ton appareil</footer>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -449,8 +448,8 @@ function seedRand(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.cha
 function shuffle(arr,rnd){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function avail(){return DB.profile.equip||[];}
 function exFor(group){const av=avail();return EX.filter(x=>x.g===group&&x.e.some(t=>av.includes(t)));}
-
 function availCardio(){return EX.filter(x=>x.g==="cardio"&&x.e.some(t=>avail().includes(t)));}
+
 function buildSession(group,slot,salt){
   const rnd=seedRand(slot+group+salt);
   let pool=exFor(group);
